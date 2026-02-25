@@ -1,0 +1,58 @@
+/* ═══ COMMAND CENTER ═══ */
+.cc-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+.cc-pulse-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+.cc-section-label {
+  margin-bottom: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* ── Technology Mix ── */
+.cc-tech-chart { margin-bottom: var(--space-5); }
+.cc-tech-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+.cc-tech-name {
+  width: 120px;
+  min-width: 120px;
+  text-align: right;
+  color: var(--text-secondary);
+}
+.cc-tech-bar-track {
+  flex: 1;
+  height: 6px;
+  background: var(--surface-alt);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.cc-tech-bar-fill {
+  height: 100%;
+  background: var(--emerald);
+  border-radius: var(--radius-sm);
+  transition: width var(--duration-base) var(--ease-out);
+}
+.cc-tech-count { color: var(--text); }
+
+/* ── Intelligence Feed ── */
+.cc-feed-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+.cc-feed-container {
+  max-height: 400px;
+  overflow-y: auto;
+}

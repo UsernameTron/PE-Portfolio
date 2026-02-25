@@ -1,0 +1,67 @@
+/* ═══ PIPELINE INTEL ═══ */
+.pi-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+.pi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  border-top: 3px solid var(--text-faint);
+  padding: var(--space-4);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.pi-card:hover { border-color: var(--border-active); }
+.pi-card-name { margin: var(--space-2) 0 var(--space-1); }
+.pi-card-location { color: var(--text-secondary); margin-bottom: var(--space-2); }
+.pi-card-badges { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-bottom: var(--space-3); }
+.pi-card-stats { display: flex; flex-direction: column; gap: var(--space-1); }
+
+/* ── Detail Panel ── */
+.pi-panel-open { animation: piSlideIn var(--duration-base) var(--ease-out); }
+@keyframes piSlideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+.pi-close-btn {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: var(--text-2xl);
+  cursor: pointer;
+  line-height: 1;
+}
+.pi-close-btn:hover { color: var(--text); }
+
+/* ── Strain Factor Bars ── */
+.pi-factor-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+.pi-factor-name { width: 120px; min-width: 120px; color: var(--text-secondary); }
+.pi-factor-bar-track {
+  flex: 1;
+  height: 6px;
+  background: var(--surface-alt);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.pi-factor-bar-fill { height: 100%; border-radius: var(--radius-sm); }
+.pi-factor-val { width: 30px; text-align: right; }
+
+/* ── Service Tags ── */
+.pi-svc-tags { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+
+/* ── Key Intelligence Table ── */
+.pi-ki-table { display: flex; flex-direction: column; }
+.pi-ki-row {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-1) 0;
+  border-bottom: 1px solid var(--border);
+}

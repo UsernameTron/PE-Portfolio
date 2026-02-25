@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACP Deal Sourcing Intelligence Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/obsidian.css">
+  <link rel="stylesheet" href="css/shell.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <span class="sidebar-brand-title">ACP</span>
+      <span class="sidebar-brand-sub">DEAL INTELLIGENCE</span>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebar-nav">
+      <a href="#command-center" class="nav-tab" data-module="command-center">
+        <span class="nav-icon">◆</span> Command Center
+      </a>
+      <a href="#deal-pipeline" class="nav-tab" data-module="deal-pipeline">
+        <span class="nav-icon">◆</span> Deal Pipeline
+      </a>
+      <a href="#thesis-engine" class="nav-tab" data-module="thesis-engine">
+        <span class="nav-icon">◇</span> Thesis Engine
+      </a>
+      <a href="#value-creation" class="nav-tab" data-module="value-creation">
+        <span class="nav-icon">◉</span> Value Creation
+      </a>
+      <a href="#agent-architecture" class="nav-tab" data-module="agent-architecture">
+        <span class="nav-icon">◎</span> Agent Architecture
+      </a>
+      <a href="#competitive-landscape" class="nav-tab" data-module="competitive-landscape">
+        <span class="nav-icon">◑</span> Competitive Landscape
+      </a>
+      <a href="#portfolio-intel" class="nav-tab" data-module="portfolio-intel">
+        <span class="nav-icon">◑</span> Portfolio Intel
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <blockquote class="sidebar-quote">
+        "We invest in founder-led B2B services businesses where we can be the partner of choice for the next chapter of growth."
+      </blockquote>
+      <span class="sidebar-attribution">ACP INVESTMENT THESIS</span>
+      <span class="sidebar-credit">BUILT BY Pete Connor</span>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN AREA ═══ -->
+  <div class="main-area">
+    <!-- Status Bar -->
+    <header class="status-bar" id="status-bar">
+      <div class="status-bar-left">
+        <span class="status-bar-title">DEAL SOURCING INTELLIGENCE</span>
+        <span class="status-bar-subtitle">PE Deal Flow Operating System</span>
+      </div>
+      <div class="status-bar-right">
+        <span class="status-badge status-badge--red" id="sb-hot">● HOT <strong>0</strong></span>
+        <span class="status-badge status-badge--amber" id="sb-warm">● WARM <strong>0</strong></span>
+        <span class="status-badge status-badge--emerald" id="sb-pipeline">● PIPELINE <strong>$0</strong></span>
+      </div>
+    </header>
+
+    <!-- Content + Right Panel Container -->
+    <div class="content-area">
+      <main class="content-main" id="content-main">
+        <!-- View modules inject their DOM here via init(container) -->
+      </main>
+      <aside class="content-panel" id="content-panel">
+        <!-- Right panel content injected by active view module -->
+      </aside>
+    </div>
+  </div>
+
+  <!-- ═══ SCRIPTS (dependency order) ═══ -->
+  <script src="js/data.js"></script>
+  <script src="js/shared-components.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
