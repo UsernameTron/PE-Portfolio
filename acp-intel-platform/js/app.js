@@ -8,7 +8,8 @@
     'value-creation':        { css: 'css/value-creation.css',        js: 'js/value-creation.js',        loaded: false, accent: 'violet' },
     'agent-architecture':    { css: 'css/agent-architecture.css',    js: 'js/agent-architecture.js',    loaded: false, accent: 'blue' },
     'competitive-landscape': { css: 'css/competitive-landscape.css', js: 'js/competitive-landscape.js', loaded: false, accent: 'amber' },
-    'portfolio-intel':       { css: 'css/portfolio-intel.css',       js: 'js/portfolio-intel.js',       loaded: false, accent: 'amber' }
+    'portfolio-intel':       { css: 'css/portfolio-intel.css',       js: 'js/portfolio-intel.js',       loaded: false, accent: 'amber' },
+    'signal-detection':      { css: 'css/signal-detection.css',      js: 'js/signal-detection.js',      loaded: false, accent: 'teal' }
   };
 
   var DEFAULT_MODULE = 'command-center';

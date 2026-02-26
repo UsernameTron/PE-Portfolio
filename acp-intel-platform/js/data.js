@@ -2713,6 +2713,275 @@
   };
 
 
+  // ═══ SIGNAL DETECTORS ═══
+  Data.signalDetectors = [
+    {
+      id: 'founder-succession',
+      name: 'Founder Succession',
+      color: 'emerald',
+      feasibility: 'HIGH',
+      costTier: '$$$',
+      monthlyCost: '$2,400\u2013$4,200',
+      description: 'Detects founders preparing to exit via succession planning signals, role transitions, and estate activity.',
+      subSignals: [
+        'LinkedIn profile changes to "Advisory" or "Board" roles',
+        'Estate planning attorney engagement via legal filings',
+        'Key-person insurance policy modifications',
+        'Increased C-suite hiring or delegation patterns',
+        'Founder age + tenure threshold analysis (60+ / 15yr+)'
+      ],
+      apiSources: [
+        { name: 'LinkedIn Sales Navigator', cost: '$1,200/mo', type: 'PRIMARY', dataType: 'Profile changes, role transitions, hiring activity' },
+        { name: 'Exit Planning Institute', cost: '$500/yr', type: 'SECONDARY', dataType: 'Succession planning certifications, advisor networks' },
+        { name: 'SEC EDGAR', cost: 'Free', type: 'SUPPLEMENTARY', dataType: '13F filings, ownership changes, insider transactions' },
+        { name: 'PitchBook', cost: '$2,000/mo', type: 'ENRICHMENT', dataType: 'Company age, founder tenure, historical transactions' }
+      ],
+      simulationSteps: [
+        { time: '00:00', phase: 'INIT', source: 'System', text: 'Initializing Founder Succession detector across 30 pipeline targets...', costDelta: 0 },
+        { time: '00:02', phase: 'QUERY', source: 'LinkedIn Sales Navigator', text: 'Querying 2,400 founder profiles in Software & TES, Healthcare IT, and Business Services...', costDelta: 0.50 },
+        { time: '00:05', phase: 'FILTER', source: 'LinkedIn Sales Navigator', text: 'Identified 47 profiles with recent role changes. Applying succession pattern matching...', costDelta: 0.30 },
+        { time: '00:08', phase: 'XREF', source: 'Exit Planning Institute', text: '12 founders show succession planning activity. Cross-referencing EPI advisor database...', costDelta: 0.15 },
+        { time: '00:11', phase: 'ENRICH', source: 'SEC EDGAR', text: 'Scanning SEC 13F filings for 12 matched entities. 3 show ownership restructuring signals.', costDelta: 0 },
+        { time: '00:14', phase: 'SCORE', source: 'PitchBook', text: 'Enriching 3 high-signal targets: founder age, company vintage, prior transaction history...', costDelta: 0.75 },
+        { time: '00:17', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Apex Compliance Services \u2014 Founder (62), 18yr tenure, "Advisory" role change. Confidence: 93%', costDelta: 0 },
+        { time: '00:18', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Meridian Industrial Services \u2014 Founder (58), estate planning attorney retained. Confidence: 87%', costDelta: 0 },
+        { time: '00:20', phase: 'COMPLETE', source: 'System', text: 'Scan complete. 2 high-confidence signals detected, 5 watch-list items flagged. Total API cost: $1.70', costDelta: 0 }
+      ]
+    },
+    {
+      id: 'platform-fatigue',
+      name: 'Platform Fatigue',
+      color: 'red',
+      feasibility: 'MEDIUM',
+      costTier: '$$',
+      monthlyCost: '$1,800\u2013$3,100',
+      description: 'Identifies founder burnout and organizational fatigue through employee sentiment, executive turnover, and product stagnation signals.',
+      subSignals: [
+        'Glassdoor rating decline > 0.5 points in 12 months',
+        'Executive turnover velocity (2+ C-suite departures in 18mo)',
+        'Product review score drops on G2/Capterra',
+        'Tech stack aging indicators (no major releases in 12mo+)',
+        'Customer support ticket volume trends'
+      ],
+      apiSources: [
+        { name: 'Glassdoor API', cost: '$800/mo', type: 'PRIMARY', dataType: 'Company ratings, leadership scores, review sentiment' },
+        { name: 'LinkedIn Sales Navigator', cost: '$1,200/mo', type: 'PRIMARY', dataType: 'Executive departures, hiring patterns, team changes' },
+        { name: 'G2/Capterra API', cost: '$600/mo', type: 'SECONDARY', dataType: 'Product ratings, review trends, competitor comparisons' },
+        { name: 'Crunchbase', cost: '$500/mo', type: 'SUPPLEMENTARY', dataType: 'Funding rounds, leadership changes, company news' }
+      ],
+      simulationSteps: [
+        { time: '00:00', phase: 'INIT', source: 'System', text: 'Initializing Platform Fatigue detector. Monitoring 1,800 mid-market companies...', costDelta: 0 },
+        { time: '00:02', phase: 'QUERY', source: 'Glassdoor API', text: 'Pulling 12-month rating trends for 1,800 targets. Filtering for declines > 0.5 points...', costDelta: 0.40 },
+        { time: '00:05', phase: 'FILTER', source: 'Glassdoor API', text: '23 companies show significant rating declines. Extracting leadership sentiment scores...', costDelta: 0.20 },
+        { time: '00:08', phase: 'XREF', source: 'LinkedIn Sales Navigator', text: 'Cross-referencing with executive turnover data. 14 of 23 show C-suite departures in 18mo...', costDelta: 0.35 },
+        { time: '00:11', phase: 'ENRICH', source: 'G2/Capterra API', text: 'Checking product review trajectories. 8 of 14 show stagnant or declining product scores...', costDelta: 0.25 },
+        { time: '00:14', phase: 'SCORE', source: 'Crunchbase', text: 'Enriching 8 fatigue candidates: last funding date, burn rate indicators, news sentiment...', costDelta: 0.15 },
+        { time: '00:17', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: TrueNorth Data Systems \u2014 Glassdoor -0.8pts, CTO departed, product reviews declining. Confidence: 84%', costDelta: 0 },
+        { time: '00:18', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Cascade Cloud Solutions \u2014 CEO transition, Glassdoor -0.6pts, no product release in 14mo. Confidence: 79%', costDelta: 0 },
+        { time: '00:20', phase: 'COMPLETE', source: 'System', text: 'Scan complete. 2 fatigue signals detected, 6 watch-list items. Total API cost: $1.35', costDelta: 0 }
+      ]
+    },
+    {
+      id: 'regulatory-tailwind',
+      name: 'Regulatory Tailwind',
+      color: 'blue',
+      feasibility: 'HIGH',
+      costTier: '$$',
+      monthlyCost: '$1,500\u2013$2,800',
+      description: 'Scans regulatory filings, legislative activity, and enforcement actions to identify companies that benefit from new compliance mandates.',
+      subSignals: [
+        'New compliance mandates creating addressable market shifts',
+        'Enforcement action increases in target sectors',
+        'Federal/state budget allocations for regulated industries',
+        'Industry-specific rule changes (EPA, OSHA, FDA, SEC)',
+        'Comment period analysis for pending regulations'
+      ],
+      apiSources: [
+        { name: 'Federal Register API', cost: 'Free', type: 'PRIMARY', dataType: 'New rules, proposed rules, notices, enforcement actions' },
+        { name: 'Congress.gov API', cost: 'Free', type: 'PRIMARY', dataType: 'Bill tracking, committee actions, appropriations' },
+        { name: 'Westlaw Edge', cost: '$1,500/mo', type: 'SECONDARY', dataType: 'Case law, regulatory analysis, compliance alerts' },
+        { name: 'Thomson Reuters', cost: '$800/mo', type: 'ENRICHMENT', dataType: 'Industry impact analysis, market sizing, regulatory calendars' }
+      ],
+      simulationSteps: [
+        { time: '00:00', phase: 'INIT', source: 'System', text: 'Initializing Regulatory Tailwind detector. Scanning 90-day filing window...', costDelta: 0 },
+        { time: '00:02', phase: 'QUERY', source: 'Federal Register API', text: 'Parsing 340 regulatory filings across EPA, OSHA, FDA, SEC, and DOL...', costDelta: 0 },
+        { time: '00:05', phase: 'FILTER', source: 'Federal Register API', text: '28 new compliance mandates identified. Filtering by sector relevance to pipeline...', costDelta: 0 },
+        { time: '00:08', phase: 'XREF', source: 'Congress.gov API', text: '9 mandates map to active legislative support. Cross-referencing appropriations bills...', costDelta: 0 },
+        { time: '00:11', phase: 'ENRICH', source: 'Westlaw Edge', text: 'Analyzing enforcement precedents for 9 regulatory shifts. 4 show mandatory compliance windows...', costDelta: 0.85 },
+        { time: '00:14', phase: 'SCORE', source: 'Thomson Reuters', text: 'Sizing addressable market impact: $2.4B cumulative TAM expansion across 4 regulatory tailwinds...', costDelta: 0.45 },
+        { time: '00:17', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Sentinel Safety Solutions \u2014 New OSHA workplace safety mandate expands TAM by $180M. Confidence: 91%', costDelta: 0 },
+        { time: '00:18', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Vanguard Testing Laboratories \u2014 FDA testing requirements increase 40% for medical devices. Confidence: 88%', costDelta: 0 },
+        { time: '00:20', phase: 'COMPLETE', source: 'System', text: 'Scan complete. 2 tailwind signals detected, 4 regulatory catalysts tracked. Total API cost: $1.30', costDelta: 0 }
+      ]
+    },
+    {
+      id: 'add-on-magnet',
+      name: 'Add-On Magnet',
+      color: 'violet',
+      feasibility: 'HIGH',
+      costTier: '$$$',
+      monthlyCost: '$2,200\u2013$3,700',
+      description: 'Maps fragmented markets to identify platform companies with high tuck-in acquisition density and geographic clustering opportunities.',
+      subSignals: [
+        'Market fragmentation metrics (HHI < 1500)',
+        'Sub-$5M EBITDA target density in sector',
+        'Geographic clustering of potential add-ons',
+        'Service overlap patterns for cross-sell',
+        'Owner-operator prevalence (founder age 55+)'
+      ],
+      apiSources: [
+        { name: 'PitchBook', cost: '$2,000/mo', type: 'PRIMARY', dataType: 'Transaction comps, company profiles, market maps' },
+        { name: 'IBISWorld', cost: '$1,200/mo', type: 'PRIMARY', dataType: 'Industry reports, market concentration, fragmentation indices' },
+        { name: 'Census Bureau', cost: 'Free', type: 'SECONDARY', dataType: 'County Business Patterns, establishment counts by NAICS' },
+        { name: 'Crunchbase', cost: '$500/mo', type: 'SUPPLEMENTARY', dataType: 'Funding status, employee counts, growth indicators' }
+      ],
+      simulationSteps: [
+        { time: '00:00', phase: 'INIT', source: 'System', text: 'Initializing Add-On Magnet detector. Mapping 12 fragmented sub-sectors...', costDelta: 0 },
+        { time: '00:02', phase: 'QUERY', source: 'IBISWorld', text: 'Pulling market concentration data for 12 sub-sectors. Filtering for HHI < 1500...', costDelta: 0.60 },
+        { time: '00:05', phase: 'FILTER', source: 'PitchBook', text: '450+ targets identified under $5M EBITDA across 8 qualifying sectors...', costDelta: 0.80 },
+        { time: '00:08', phase: 'XREF', source: 'Census Bureau', text: 'Mapping geographic density: 38 metro clusters with 5+ potential add-ons identified...', costDelta: 0 },
+        { time: '00:11', phase: 'ENRICH', source: 'Crunchbase', text: 'Enriching 38 clusters: ownership structure, founding dates, employee trajectories...', costDelta: 0.25 },
+        { time: '00:14', phase: 'SCORE', source: 'PitchBook', text: 'Scoring platform candidates by add-on density. 12 platforms have 8+ tuck-in targets within 100mi...', costDelta: 0.40 },
+        { time: '00:17', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Meridian Industrial Services \u2014 23 add-on targets in $2-5M EBITDA range within 150mi. Confidence: 90%', costDelta: 0 },
+        { time: '00:18', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Skyline HVAC Holdings \u2014 18 owner-operator targets (avg age 61) in fragmented HVAC services. Confidence: 86%', costDelta: 0 },
+        { time: '00:20', phase: 'COMPLETE', source: 'System', text: 'Scan complete. 2 add-on magnets identified, 38 geographic clusters mapped. Total API cost: $2.05', costDelta: 0 }
+      ]
+    },
+    {
+      id: 'carve-out-candidate',
+      name: 'Carve-Out Candidate',
+      color: 'amber',
+      feasibility: 'MEDIUM',
+      costTier: '$$$',
+      monthlyCost: '$3,200\u2013$6,700',
+      description: 'Analyzes public company filings and activist activity to identify non-core divisions ripe for spin-off or divestiture.',
+      subSignals: [
+        'Segment margin divergence > 500bps in 10-K filings',
+        'Activist investor presence or 13D filings',
+        'Strategic review announcements or advisor retention',
+        'Non-core divestiture language in earnings calls',
+        'Management commentary signaling portfolio simplification'
+      ],
+      apiSources: [
+        { name: 'SEC EDGAR (10-K/10-Q)', cost: 'Free', type: 'PRIMARY', dataType: 'Segment reporting, margin analysis, management commentary' },
+        { name: 'Bloomberg Terminal', cost: '$3,000/mo', type: 'PRIMARY', dataType: 'Real-time filings, earnings transcripts, analyst consensus' },
+        { name: 'CapIQ', cost: '$2,500/mo', type: 'SECONDARY', dataType: 'Segment financials, peer analysis, transaction comps' },
+        { name: 'Activist Insight', cost: '$1,200/mo', type: 'ENRICHMENT', dataType: '13D filings, activist campaigns, board challenges' }
+      ],
+      simulationSteps: [
+        { time: '00:00', phase: 'INIT', source: 'System', text: 'Initializing Carve-Out Candidate detector. Parsing annual filings for multi-segment companies...', costDelta: 0 },
+        { time: '00:02', phase: 'QUERY', source: 'SEC EDGAR (10-K/10-Q)', text: 'Scanning 180 10-K filings for segment reporting. Extracting margin data by division...', costDelta: 0 },
+        { time: '00:05', phase: 'FILTER', source: 'SEC EDGAR (10-K/10-Q)', text: '34 companies show segment margin gaps exceeding 500bps. Prioritizing by deal size...', costDelta: 0 },
+        { time: '00:08', phase: 'XREF', source: 'Activist Insight', text: 'Cross-referencing with activist investor database. 12 of 34 have active 13D filings or campaigns...', costDelta: 0.60 },
+        { time: '00:11', phase: 'ENRICH', source: 'Bloomberg Terminal', text: 'Analyzing earnings call transcripts: 5 mention "strategic alternatives" or "portfolio optimization"...', costDelta: 1.20 },
+        { time: '00:14', phase: 'SCORE', source: 'CapIQ', text: 'Building standalone valuations for 5 carve-out candidates. Applying peer multiples...', costDelta: 0.90 },
+        { time: '00:17', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Summit Packaging Group \u2014 Specialty division at 22% margin vs. 8% core. Activist pressure mounting. Confidence: 85%', costDelta: 0 },
+        { time: '00:18', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Atlas Precision Components \u2014 Aerospace unit margin 18% vs. 6% industrial. "Strategic review" announced. Confidence: 82%', costDelta: 0 },
+        { time: '00:20', phase: 'COMPLETE', source: 'System', text: 'Scan complete. 2 carve-out candidates identified, 5 under strategic review. Total API cost: $2.70', costDelta: 0 }
+      ]
+    },
+    {
+      id: 'management-upgrade',
+      name: 'Management Upgrade',
+      color: 'red',
+      feasibility: 'EXPLORATORY',
+      costTier: '$$',
+      monthlyCost: '$1,600\u2013$2,800',
+      description: 'Identifies companies with weak management teams where PE-installed leadership could unlock significant value creation.',
+      subSignals: [
+        'CEO tenure < 2 years with no clear succession plan',
+        'CFO vacancy or interim leadership > 6 months',
+        'Glassdoor leadership scores below 3.0/5.0',
+        'Litigation involving senior executives',
+        'Board composition gaps (no independent directors)'
+      ],
+      apiSources: [
+        { name: 'LinkedIn Sales Navigator', cost: '$1,200/mo', type: 'PRIMARY', dataType: 'Executive profiles, tenure data, hiring patterns' },
+        { name: 'Glassdoor API', cost: '$800/mo', type: 'PRIMARY', dataType: 'Leadership ratings, CEO approval, management reviews' },
+        { name: 'ZoomInfo', cost: '$600/mo', type: 'SECONDARY', dataType: 'Org charts, executive contact data, company signals' },
+        { name: 'Court Records (PACER)', cost: 'Free', type: 'SUPPLEMENTARY', dataType: 'Executive litigation, regulatory actions, bankruptcy filings' }
+      ],
+      simulationSteps: [
+        { time: '00:00', phase: 'INIT', source: 'System', text: 'Initializing Management Upgrade detector. Screening 2,100 leadership profiles...', costDelta: 0 },
+        { time: '00:02', phase: 'QUERY', source: 'LinkedIn Sales Navigator', text: 'Scanning C-suite tenure data across target sectors. Filtering for transitions in 24mo...', costDelta: 0.45 },
+        { time: '00:05', phase: 'FILTER', source: 'LinkedIn Sales Navigator', text: '67 companies show CEO transitions in past 24 months. 34 have no clear succession plan...', costDelta: 0.20 },
+        { time: '00:08', phase: 'XREF', source: 'Glassdoor API', text: 'Cross-referencing leadership sentiment. 23 of 34 have leadership scores below 3.0...', costDelta: 0.30 },
+        { time: '00:11', phase: 'ENRICH', source: 'ZoomInfo', text: 'Mapping org chart completeness for 23 targets. 9 show CFO vacancy or interim leadership...', costDelta: 0.20 },
+        { time: '00:14', phase: 'SCORE', source: 'Court Records (PACER)', text: 'Checking litigation exposure for 9 high-signal targets. 3 have active executive-related cases...', costDelta: 0 },
+        { time: '00:17', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Prism Engineering Consultants \u2014 CEO departed 8mo ago, Glassdoor 2.4, CFO interim. Confidence: 81%', costDelta: 0 },
+        { time: '00:18', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Ironclad Fabrication Holdings \u2014 Leadership score 2.7, 3 C-suite departures in 18mo. Confidence: 76%', costDelta: 0 },
+        { time: '00:20', phase: 'COMPLETE', source: 'System', text: 'Scan complete. 2 upgrade candidates identified, 7 on watch list. Total API cost: $1.15', costDelta: 0 }
+      ]
+    },
+    {
+      id: 'recurring-moat',
+      name: 'Recurring Moat',
+      color: 'emerald',
+      feasibility: 'HIGH',
+      costTier: '$$',
+      monthlyCost: '$1,800\u2013$3,300',
+      description: 'Detects companies with high recurring revenue, strong net retention, and defensible competitive positions indicating durable cash flows.',
+      subSignals: [
+        'Net Revenue Retention > 110% (expansion revenue)',
+        'Contract length > 24 months with auto-renewal',
+        'High switching costs or integration depth',
+        'G2/Capterra category leadership position',
+        'Customer concentration < 15% (top 10 clients)'
+      ],
+      apiSources: [
+        { name: 'G2/Capterra API', cost: '$600/mo', type: 'PRIMARY', dataType: 'Product rankings, review scores, category positioning' },
+        { name: 'SimilarWeb', cost: '$500/mo', type: 'PRIMARY', dataType: 'Web traffic trends, engagement metrics, competitive share' },
+        { name: 'PitchBook', cost: '$2,000/mo', type: 'SECONDARY', dataType: 'Revenue metrics, growth rates, financial profiles' },
+        { name: 'Customer Reference Checks', cost: '$200/survey', type: 'ENRICHMENT', dataType: 'NPS scores, contract terms, switching intent' }
+      ],
+      simulationSteps: [
+        { time: '00:00', phase: 'INIT', source: 'System', text: 'Initializing Recurring Moat detector. Analyzing 800 SaaS and recurring-services companies...', costDelta: 0 },
+        { time: '00:02', phase: 'QUERY', source: 'G2/Capterra API', text: 'Pulling product review data and category rankings for 800 targets...', costDelta: 0.35 },
+        { time: '00:05', phase: 'FILTER', source: 'PitchBook', text: '120 companies show NRR > 110%. Filtering for multi-year contract structures...', costDelta: 0.55 },
+        { time: '00:08', phase: 'XREF', source: 'SimilarWeb', text: '45 of 120 show sustained web traffic growth + high engagement. Cross-referencing stickiness metrics...', costDelta: 0.25 },
+        { time: '00:11', phase: 'ENRICH', source: 'PitchBook', text: 'Checking customer concentration for 45 targets. 18 have top-10 client concentration < 15%...', costDelta: 0.40 },
+        { time: '00:14', phase: 'SCORE', source: 'Customer Reference Checks', text: 'Running NPS analysis on 18 finalists. Avg NPS: 62. 12 report "very unlikely" to switch...', costDelta: 0.60 },
+        { time: '00:17', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Apex Compliance Services \u2014 NRR 118%, 36mo avg contracts, G2 Leader, 8% concentration. Confidence: 95%', costDelta: 0 },
+        { time: '00:18', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Keystone Actuarial Partners \u2014 NRR 112%, regulatory lock-in, NPS 71, 11% concentration. Confidence: 89%', costDelta: 0 },
+        { time: '00:20', phase: 'COMPLETE', source: 'System', text: 'Scan complete. 2 recurring moats identified, 18 with strong retention metrics. Total API cost: $2.15', costDelta: 0 }
+      ]
+    },
+    {
+      id: 'sector-consolidator',
+      name: 'Sector Consolidator',
+      color: 'teal',
+      feasibility: 'HIGH',
+      costTier: '$$',
+      monthlyCost: '$1,800\u2013$3,500',
+      description: 'Maps sector consolidation dynamics to identify markets where PE-backed roll-up strategies can capture outsized returns.',
+      subSignals: [
+        'Top-5 market share < 20% (highly fragmented)',
+        '3+ M&A transactions in sector within 12 months',
+        'PE-backed platforms actively acquiring in space',
+        'Fragmentation index above sector median',
+        'Low regulatory barriers to entry (no licensing moats)'
+      ],
+      apiSources: [
+        { name: 'PitchBook', cost: '$2,000/mo', type: 'PRIMARY', dataType: 'Transaction activity, PE platform mapping, deal flow' },
+        { name: 'IBISWorld', cost: '$1,200/mo', type: 'PRIMARY', dataType: 'Market share data, industry structure, consolidation trends' },
+        { name: 'Census Bureau', cost: 'Free', type: 'SECONDARY', dataType: 'Establishment counts by NAICS, firm size distribution' },
+        { name: 'Trade Publications', cost: '$300/mo', type: 'SUPPLEMENTARY', dataType: 'Industry news, M&A announcements, market commentary' }
+      ],
+      simulationSteps: [
+        { time: '00:00', phase: 'INIT', source: 'System', text: 'Initializing Sector Consolidator detector. Mapping 15 target sectors by concentration...', costDelta: 0 },
+        { time: '00:02', phase: 'QUERY', source: 'IBISWorld', text: 'Calculating HHI indices for 15 sectors. Pulling market share data for top-10 players...', costDelta: 0.55 },
+        { time: '00:05', phase: 'FILTER', source: 'IBISWorld', text: '8 sectors score HHI < 1500 (highly fragmented). Top-5 share ranges from 8% to 19%...', costDelta: 0.30 },
+        { time: '00:08', phase: 'XREF', source: 'PitchBook', text: 'Mapping PE platform activity: 24 active acquirers across 8 fragmented sectors in 12mo...', costDelta: 0.65 },
+        { time: '00:11', phase: 'ENRICH', source: 'Census Bureau', text: 'Counting establishment density: 12 sectors have 10,000+ firms under $10M revenue...', costDelta: 0 },
+        { time: '00:14', phase: 'SCORE', source: 'Trade Publications', text: 'Analyzing consolidation velocity: 4 sectors show accelerating deal pace (15+ transactions/yr)...', costDelta: 0.15 },
+        { time: '00:17', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Keystone Actuarial Partners \u2014 Actuarial services HHI 820, 12 transactions in 12mo, 3 PE platforms active. Confidence: 92%', costDelta: 0 },
+        { time: '00:18', phase: 'DETECT', source: 'Signal Hunter', text: 'SIGNAL: Ridgeline Specialty Distribution \u2014 Specialty distribution HHI 1,100, top-5 share 14%, 8 tuck-ins available. Confidence: 87%', costDelta: 0 },
+        { time: '00:20', phase: 'COMPLETE', source: 'System', text: 'Scan complete. 2 consolidation plays identified, 8 fragmented sectors mapped. Total API cost: $1.65', costDelta: 0 }
+      ]
+    }
+  ];
+
+
   // ── Export ──
   window.Data = Data;
 

@@ -1,0 +1,148 @@
+/* ═══ SIGNAL DETECTION ═══ */
+.sd-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--emerald);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-3);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out);
+}
+.sd-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.sd-card.active { border-color: var(--teal); box-shadow: 0 0 0 1px var(--teal); }
+
+/* Card layout */
+.sd-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+.sd-card-badges { display: flex; gap: var(--space-2); align-items: center; }
+
+/* Sub-signal list */
+.sd-subsignals {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-2) 0 0;
+}
+.sd-subsignals li {
+  font: 400 12px/1.5 var(--font-sans);
+  color: var(--text-secondary);
+  padding: 2px 0;
+  padding-left: var(--space-3);
+  position: relative;
+}
+.sd-subsignals li::before {
+  content: '\203A';
+  position: absolute;
+  left: 4px;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.sd-card-meta {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border);
+}
+
+/* KPI row */
+.sd-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+/* ── Panel Styles ── */
+.sd-source-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border);
+}
+.sd-source-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sd-source-type {
+  display: inline-block;
+  font: 700 9px/1 var(--font-mono);
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  color: var(--text-muted);
+}
+.sd-source-type--primary { background: var(--emerald-muted); color: var(--emerald); }
+.sd-source-type--secondary { background: var(--blue-muted); color: var(--blue); }
+.sd-source-type--enrichment { background: var(--violet-muted); color: var(--violet); }
+
+.sd-cost-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-alt);
+  border-radius: var(--radius-md);
+  margin: var(--space-3) 0;
+}
+
+.sd-btn-row {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.sd-btn-row .action-btn { flex: 1; }
+
+.sd-live-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+}
+
+.sd-sim-feed {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.sd-result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+.sd-result-row:hover { background: var(--surface-alt); }
+.sd-result-info { display: flex; align-items: center; gap: var(--space-2); }
+
+/* Panel methodology list */
+.sd-method-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sd-method-list li {
+  font: 400 12px/1.5 var(--font-sans);
+  color: var(--text-secondary);
+  padding: 3px 0;
+  padding-left: var(--space-3);
+  position: relative;
+}
+.sd-method-list li::before {
+  content: '\2022';
+  position: absolute;
+  left: 4px;
+  color: var(--teal);
+}
