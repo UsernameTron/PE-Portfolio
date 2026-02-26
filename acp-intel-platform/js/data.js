@@ -34,6 +34,36 @@
       tier: "HOT",
       signals: ["FOUNDER SUCCESSION", "RECURRING MOAT"],
       signalColors: ["emerald", "emerald"],
+      signalDetails: [
+        {
+          type: "FOUNDER_SUCCESSION",
+          label: "FOUNDER SUCCESSION",
+          color: "emerald",
+          confidence: 0.93,
+          detectedAt: "2026-02-03",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "LinkedIn Sales Navigator", dataPoint: "Founder (age 62) updated profile to 'Advisory' role; succession advisor Bridgepoint Advisors engagement confirmed" },
+            { provider: "Exit Planning Institute", dataPoint: "Estate planning initiated Q1 2026; liquidity event timeline identified as 12-18 months" }
+          ],
+          narrative: "Apex Compliance Services founder at age 62 has engaged succession advisors and initiated estate planning, signaling a near-term liquidity event for this $11.5M EBITDA RegTech platform in Austin."
+        },
+        {
+          type: "RECURRING_MOAT",
+          label: "RECURRING MOAT",
+          color: "emerald",
+          confidence: 0.91,
+          detectedAt: "2026-02-05",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "SaaS platform embedded in 1,200+ mid-market compliance workflows with 94% recurring revenue" },
+            { provider: "Gartner", dataPoint: "Net revenue retention of 118% confirmed; category leader in compliance workflow automation" }
+          ],
+          narrative: "Apex Compliance demonstrates an exceptional recurring revenue moat with 94% recurring revenue and 118% NRR across 1,200+ mid-market clients, creating a highly defensible platform for PE-backed consolidation."
+        }
+      ],
       ebitda: "$11.5M",
       ebitdaNum: 11.5,
       revenue: "$58M",
@@ -70,6 +100,36 @@
       tier: "HOT",
       signals: ["FOUNDER SUCCESSION", "ADD-ON MAGNET"],
       signalColors: ["emerald", "violet"],
+      signalDetails: [
+        {
+          type: "FOUNDER_SUCCESSION",
+          label: "FOUNDER SUCCESSION",
+          color: "emerald",
+          confidence: 0.90,
+          detectedAt: "2026-02-02",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "LinkedIn Sales Navigator", dataPoint: "Owner-operator (age 64) no identified successor; recent networking with wealth management advisors" },
+            { provider: "Axial Network", dataPoint: "Confidential outreach detected from advisor network indicating liquidity exploration" }
+          ],
+          narrative: "Meridian Industrial Services owner-operator at age 64 has no identified successor and is actively exploring liquidity options for the Gulf Coast environmental remediation platform generating $9.8M EBITDA."
+        },
+        {
+          type: "ADD_ON_MAGNET",
+          label: "ADD-ON MAGNET",
+          color: "violet",
+          confidence: 0.88,
+          detectedAt: "2026-02-06",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "200+ regional environmental remediation competitors identified in Gulf Coast market, majority sub-$5M revenue" },
+            { provider: "IBISWorld", dataPoint: "Environmental remediation industry fragmentation index of 0.82; top 10 players hold less than 15% market share" }
+          ],
+          narrative: "Meridian's dominant Houston position amid 200+ fragmented regional competitors makes it an ideal roll-up platform for Gulf Coast environmental services consolidation."
+        }
+      ],
       ebitda: "$9.8M",
       ebitdaNum: 9.8,
       revenue: "$67M",
@@ -106,6 +166,36 @@
       tier: "HOT",
       signals: ["RECURRING MOAT", "SECTOR CONSOLIDATOR"],
       signalColors: ["emerald", "red"],
+      signalDetails: [
+        {
+          type: "RECURRING_MOAT",
+          label: "RECURRING MOAT",
+          color: "emerald",
+          confidence: 0.89,
+          detectedAt: "2026-02-04",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "Multi-year retainer contracts across 60+ P&C carriers with 97% client retention over 5 years" },
+            { provider: "IBISWorld", dataPoint: "Actuarial consulting market growing at 6.2% CAGR; Keystone ranked top-15 nationally by revenue" }
+          ],
+          narrative: "Keystone Actuarial Partners holds a deeply embedded recurring revenue position with 97% client retention across 60+ P&C carriers, creating a durable moat in the Hartford insurance consulting market."
+        },
+        {
+          type: "SECTOR_CONSOLIDATOR",
+          label: "SECTOR CONSOLIDATOR",
+          color: "red",
+          confidence: 0.86,
+          detectedAt: "2026-02-07",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "100+ boutique actuarial firms identified as potential consolidation targets nationally" },
+            { provider: "S&P Capital IQ", dataPoint: "Three actuarial firm acquisitions completed in trailing 12 months by PE-backed platforms; multiples trending 9-11x" }
+          ],
+          narrative: "The actuarial consulting sector features 100+ boutique firms ripe for consolidation, positioning Keystone as a natural platform acquirer with institutional capital backing from its Hartford base."
+        }
+      ],
       ebitda: "$7.4M",
       ebitdaNum: 7.4,
       revenue: "$32M",
@@ -142,6 +232,36 @@
       tier: "HOT",
       signals: ["PLATFORM FATIGUE", "RECURRING MOAT"],
       signalColors: ["red", "emerald"],
+      signalDetails: [
+        {
+          type: "PLATFORM_FATIGUE",
+          label: "PLATFORM FATIGUE",
+          color: "red",
+          confidence: 0.87,
+          detectedAt: "2026-02-08",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "Bootstrapped vertical SaaS at $42M revenue showing declining feature release velocity; tech stack aging indicators detected" },
+            { provider: "G2 Reviews", dataPoint: "Customer reviews cite need for deeper integrations and mobile capabilities; founder acknowledges resource constraints" }
+          ],
+          narrative: "TrueNorth Data Systems founder has bootstrapped to $42M revenue but is hitting a clear growth ceiling in building materials vertical SaaS, needing institutional resources to overcome platform fatigue."
+        },
+        {
+          type: "RECURRING_MOAT",
+          label: "RECURRING MOAT",
+          color: "emerald",
+          confidence: 0.92,
+          detectedAt: "2026-02-06",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "92% recurring SaaS revenue with 130% net expansion rate across building materials distribution vertical" },
+            { provider: "Gartner", dataPoint: "Category-defining product in underserved building materials distribution vertical; no direct SaaS competitor at scale" }
+          ],
+          narrative: "TrueNorth's 92% recurring revenue and exceptional 130% net expansion rate in the underserved building materials vertical SaaS category create a category-defining moat in Minneapolis."
+        }
+      ],
       ebitda: "$8.2M",
       ebitdaNum: 8.2,
       revenue: "$42M",
@@ -178,6 +298,36 @@
       tier: "HOT",
       signals: ["REGULATORY TAILWIND", "ADD-ON MAGNET"],
       signalColors: ["blue", "violet"],
+      signalDetails: [
+        {
+          type: "REGULATORY_TAILWIND",
+          label: "REGULATORY TAILWIND",
+          color: "blue",
+          confidence: 0.88,
+          detectedAt: "2026-02-10",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "Federal Register", dataPoint: "New OSHA enforcement expansion rule published; workplace safety compliance requirements broadened across 12 additional SIC codes" },
+            { provider: "LexisNexis", dataPoint: "OSHA penalty escalation provisions increasing fines 35% effective Q2 2026; multi-year enforcement regime confirmed" }
+          ],
+          narrative: "Sentinel Safety Solutions in Charlotte is positioned to capture 15%+ organic growth from the new OSHA enforcement expansion, creating a multi-year regulatory tailwind for workplace safety compliance."
+        },
+        {
+          type: "ADD_ON_MAGNET",
+          label: "ADD-ON MAGNET",
+          color: "violet",
+          confidence: 0.85,
+          detectedAt: "2026-02-12",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "12 regional safety compliance firms identified as add-on targets in Mid-Atlantic and Midwest geographies" },
+            { provider: "IBISWorld", dataPoint: "Workplace safety compliance market highly fragmented with top 20 firms holding less than 25% share nationally" }
+          ],
+          narrative: "Sentinel has identified 12 regional add-on targets for geographic expansion from its Southeast base into Mid-Atlantic and Midwest, supported by the fragmented $6.5M EBITDA safety compliance market."
+        }
+      ],
       ebitda: "$6.5M",
       ebitdaNum: 6.5,
       revenue: "$38M",
@@ -214,6 +364,36 @@
       tier: "HOT",
       signals: ["FOUNDER SUCCESSION", "SECTOR CONSOLIDATOR"],
       signalColors: ["emerald", "red"],
+      signalDetails: [
+        {
+          type: "FOUNDER_SUCCESSION",
+          label: "FOUNDER SUCCESSION",
+          color: "emerald",
+          confidence: 0.84,
+          detectedAt: "2026-02-09",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "LinkedIn Sales Navigator", dataPoint: "Founder (age 59) exploring liquidity after 28 years of ownership; recent wealth advisor engagement detected" },
+            { provider: "PrivCo", dataPoint: "Ridgeline ownership structure indicates sole proprietor with no institutional investors or family succession plan" }
+          ],
+          narrative: "Ridgeline Specialty Distribution founder at age 59 is exploring liquidity after 28 years building a $94M revenue Mountain West industrial distributor, signaling a proprietary succession opportunity in Denver."
+        },
+        {
+          type: "SECTOR_CONSOLIDATOR",
+          label: "SECTOR CONSOLIDATOR",
+          color: "red",
+          confidence: 0.82,
+          detectedAt: "2026-02-11",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "IBISWorld", dataPoint: "Rocky Mountain specialty industrial distribution market fragmented with 50+ regional players under $50M revenue" },
+            { provider: "PitchBook", dataPoint: "Two PE-backed distribution platforms completed roll-ups in adjacent Western US markets in trailing 18 months" }
+          ],
+          narrative: "Ridgeline's defensible vendor relationships and proprietary product lines make it an ideal platform for Rocky Mountain industrial distribution consolidation across 50+ fragmented regional competitors."
+        }
+      ],
       ebitda: "$12.1M",
       ebitdaNum: 12.1,
       revenue: "$94M",
@@ -250,6 +430,36 @@
       tier: "HOT",
       signals: ["REGULATORY TAILWIND", "RECURRING MOAT"],
       signalColors: ["blue", "emerald"],
+      signalDetails: [
+        {
+          type: "REGULATORY_TAILWIND",
+          label: "REGULATORY TAILWIND",
+          color: "blue",
+          confidence: 0.86,
+          detectedAt: "2026-02-07",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "Federal Register", dataPoint: "New FCC and EPA compliance mandates for semiconductor and electronics testing published; effective dates staggered through 2027" },
+            { provider: "Compliance Week", dataPoint: "Electronics testing lab capacity nationally at 92% utilization; regulatory expansion expected to drive 20%+ demand increase" }
+          ],
+          narrative: "Vanguard Testing Laboratories in San Jose is experiencing record demand driven by new FCC and EPA compliance mandates, creating a sustained regulatory tailwind for semiconductor testing services."
+        },
+        {
+          type: "RECURRING_MOAT",
+          label: "RECURRING MOAT",
+          color: "emerald",
+          confidence: 0.83,
+          detectedAt: "2026-02-09",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "85% repeat revenue from 40+ OEM clients with multi-year certification testing agreements" },
+            { provider: "Gartner", dataPoint: "Specialized semiconductor testing lab accreditations create 18-24 month switching barriers for OEM clients" }
+          ],
+          narrative: "Vanguard's 85% repeat revenue from 40+ OEM clients and specialized accreditations create deep switching costs and a defensible recurring moat in the capacity-constrained electronics testing market."
+        }
+      ],
       ebitda: "$5.8M",
       ebitdaNum: 5.8,
       revenue: "$28M",
@@ -282,10 +492,40 @@
       sector: "Software & TES",
       subsector: "Managed IT Services",
       location: "Seattle, WA",
-      score: 72,
+      score: 76,
       tier: "HOT",
       signals: ["PLATFORM FATIGUE", "ADD-ON MAGNET"],
       signalColors: ["red", "violet"],
+      signalDetails: [
+        {
+          type: "PLATFORM_FATIGUE",
+          label: "PLATFORM FATIGUE",
+          color: "red",
+          confidence: 0.84,
+          detectedAt: "2026-02-11",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "G2 Reviews", dataPoint: "Cascade Cloud customer reviews highlight desire for expanded cybersecurity and cloud migration services beyond current MSP scope" },
+            { provider: "StackShare", dataPoint: "Technology stack aging indicators; founder-led MSP at $52M revenue hitting growth ceiling without institutional playbook" }
+          ],
+          narrative: "Cascade Cloud Solutions founder is hitting a growth ceiling at $52M revenue in Seattle, needing institutional resources and a professional management playbook to unlock the next phase of MSP growth."
+        },
+        {
+          type: "ADD_ON_MAGNET",
+          label: "ADD-ON MAGNET",
+          color: "violet",
+          confidence: 0.86,
+          detectedAt: "2026-02-13",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "15+ MSP add-on targets identified in Pacific Northwest region, ranging from $1-5M revenue" },
+            { provider: "GF Data", dataPoint: "MSP sector median acquisition multiple at 6-8x EBITDA; sub-$5M revenue targets available at 4-5x" }
+          ],
+          narrative: "Cascade's 350+ SMB client base and $3.8M MRR position it as a natural roll-up platform with 15+ identified MSP add-on targets across the highly fragmented Pacific Northwest market."
+        }
+      ],
       ebitda: "$7.9M",
       ebitdaNum: 7.9,
       revenue: "$52M",
@@ -324,6 +564,36 @@
       tier: "WARM",
       signals: ["MANAGEMENT UPGRADE", "ADD-ON MAGNET"],
       signalColors: ["teal", "violet"],
+      signalDetails: [
+        {
+          type: "MANAGEMENT_UPGRADE",
+          label: "MANAGEMENT UPGRADE",
+          color: "teal",
+          confidence: 0.81,
+          detectedAt: "2026-02-08",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "LinkedIn Sales Navigator", dataPoint: "Management depth gap identified below founder-CEO; no VP-level hires in past 3 years despite $41M revenue scale" },
+            { provider: "Glassdoor", dataPoint: "Employee reviews cite lack of middle management structure and career development opportunities" }
+          ],
+          narrative: "Prism Engineering Consultants in Atlanta shows a clear management depth gap below the founder-CEO, presenting an opportunity to unlock value through professional management installation post-acquisition."
+        },
+        {
+          type: "ADD_ON_MAGNET",
+          label: "ADD-ON MAGNET",
+          color: "violet",
+          confidence: 0.78,
+          detectedAt: "2026-02-10",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "8 tuck-in engineering consultancy targets identified in adjacent Southeast geographies" },
+            { provider: "IBISWorld", dataPoint: "Engineering consulting market in Southeast US growing at 5.8% CAGR with highly fragmented competitive landscape" }
+          ],
+          narrative: "Prism's deep DOT relationships and 8 identified tuck-in targets across the fragmented Southeast engineering consulting market make it a compelling add-on acquisition platform."
+        }
+      ],
       ebitda: "$6.2M",
       ebitdaNum: 6.2,
       revenue: "$41M",
@@ -360,6 +630,36 @@
       tier: "WARM",
       signals: ["CARVE-OUT CANDIDATE", "RECURRING MOAT"],
       signalColors: ["amber", "emerald"],
+      signalDetails: [
+        {
+          type: "CARVE_OUT_CANDIDATE",
+          label: "CARVE-OUT CANDIDATE",
+          color: "amber",
+          confidence: 0.82,
+          detectedAt: "2026-02-05",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "SEC EDGAR", dataPoint: "$2B parent packaging conglomerate disclosed strategic review of non-core divisions in Q4 2025 10-K filing" },
+            { provider: "PitchBook", dataPoint: "Parent company engaged two bulge bracket banks for potential divestitures; Summit identified as non-core asset" }
+          ],
+          narrative: "Summit Packaging Group is a non-core division of a $2B conglomerate undergoing strategic review, creating a carve-out opportunity for the $8.7M EBITDA specialty packaging unit in Nashville."
+        },
+        {
+          type: "RECURRING_MOAT",
+          label: "RECURRING MOAT",
+          color: "emerald",
+          confidence: 0.80,
+          detectedAt: "2026-02-07",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "80% of revenue under multi-year contracts with consumer staples manufacturers; average contract duration 3.2 years" },
+            { provider: "IBISWorld", dataPoint: "Specialty packaging for consumer staples demonstrates high switching costs due to custom tooling and FDA compliance requirements" }
+          ],
+          narrative: "Summit's 80% contracted revenue with consumer staples manufacturers under multi-year agreements creates a defensible recurring moat with strong standalone economics if carved out with dedicated management."
+        }
+      ],
       ebitda: "$8.7M",
       ebitdaNum: 8.7,
       revenue: "$62M",
@@ -396,6 +696,36 @@
       tier: "WARM",
       signals: ["FOUNDER SUCCESSION", "RECURRING MOAT"],
       signalColors: ["emerald", "emerald"],
+      signalDetails: [
+        {
+          type: "FOUNDER_SUCCESSION",
+          label: "FOUNDER SUCCESSION",
+          color: "emerald",
+          confidence: 0.79,
+          detectedAt: "2026-02-12",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "LinkedIn Sales Navigator", dataPoint: "Founder (age 61) exploring partial liquidity; recent connections with PE-focused wealth advisors in Raleigh market" },
+            { provider: "PrivCo", dataPoint: "RIA with $2.4B AUM under sole founder ownership; no institutional capital or family succession plan identified" }
+          ],
+          narrative: "Pinehurst Wealth Advisors founder at age 61 is exploring partial liquidity for the $2.4B AUM RIA in Raleigh, opening a window for PE-backed RIA consolidation in the Carolinas."
+        },
+        {
+          type: "RECURRING_MOAT",
+          label: "RECURRING MOAT",
+          color: "emerald",
+          confidence: 0.83,
+          detectedAt: "2026-02-10",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "98% recurring fee revenue from high-net-worth client base across $2.4B assets under management" },
+            { provider: "IBISWorld", dataPoint: "RIA sector demonstrates 95%+ client retention rates; fee-based revenue model provides predictable cash flows" }
+          ],
+          narrative: "Pinehurst's 98% recurring fee revenue across $2.4B AUM from high-net-worth clients creates an exceptionally sticky revenue moat ideal for PE-backed RIA roll-up in the Carolinas market."
+        }
+      ],
       ebitda: "$4.8M",
       ebitdaNum: 4.8,
       revenue: "$19M",
@@ -432,6 +762,36 @@
       tier: "WARM",
       signals: ["SECTOR CONSOLIDATOR", "MANAGEMENT UPGRADE"],
       signalColors: ["red", "teal"],
+      signalDetails: [
+        {
+          type: "SECTOR_CONSOLIDATOR",
+          label: "SECTOR CONSOLIDATOR",
+          color: "red",
+          confidence: 0.77,
+          detectedAt: "2026-02-06",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "Great Lakes metal fabrication market features 80+ independent shops with average revenue under $30M" },
+            { provider: "IBISWorld", dataPoint: "Metal fabrication industry consolidation accelerating; 15 PE-backed platforms completed roll-ups nationally in past 24 months" }
+          ],
+          narrative: "Ironclad Fabrication Holdings in Cleveland serves as a natural platform for Great Lakes regional metal fabrication consolidation amid 80+ independent shops in the fragmented Midwest market."
+        },
+        {
+          type: "MANAGEMENT_UPGRADE",
+          label: "MANAGEMENT UPGRADE",
+          color: "teal",
+          confidence: 0.76,
+          detectedAt: "2026-02-09",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "LinkedIn Sales Navigator", dataPoint: "Thin management bench identified; no dedicated COO or CFO roles despite $78M revenue and $10.3M EBITDA" },
+            { provider: "Glassdoor", dataPoint: "Reviews indicate strong operational capabilities but founder-dependent decision-making and lack of professional management structure" }
+          ],
+          narrative: "Ironclad's strong $10.3M EBITDA operational foundation is constrained by a thin management bench, requiring COO and CFO recruitment post-close to unlock the Great Lakes consolidation thesis."
+        }
+      ],
       ebitda: "$10.3M",
       ebitdaNum: 10.3,
       revenue: "$78M",
@@ -468,6 +828,36 @@
       tier: "WARM",
       signals: ["PLATFORM FATIGUE", "RECURRING MOAT"],
       signalColors: ["red", "emerald"],
+      signalDetails: [
+        {
+          type: "PLATFORM_FATIGUE",
+          label: "PLATFORM FATIGUE",
+          color: "red",
+          confidence: 0.78,
+          detectedAt: "2026-02-14",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "G2 Reviews", dataPoint: "Enterprise LMS clients requesting AI-powered learning paths and mobile-first UX; current platform lagging competitors on feature velocity" },
+            { provider: "Gartner", dataPoint: "BrightPath ranked in 'Niche Players' quadrant; product roadmap under-invested relative to peer set due to founder capital constraints" }
+          ],
+          narrative: "BrightPath Learning Systems founder-CEO in Boston is seeking an operating partner to accelerate the LMS product roadmap after growth has stalled due to under-investment in product and go-to-market."
+        },
+        {
+          type: "RECURRING_MOAT",
+          label: "RECURRING MOAT",
+          color: "emerald",
+          confidence: 0.80,
+          detectedAt: "2026-02-11",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "88% SaaS revenue with 95% gross retention across 180+ enterprise LMS clients" },
+            { provider: "Gartner", dataPoint: "Corporate LMS switching costs averaging 12-18 months of implementation; embedded workflow integration creates durable moat" }
+          ],
+          narrative: "BrightPath's 88% SaaS revenue and 95% gross retention across 180+ enterprise clients create a sticky recurring moat in the corporate LMS market, providing a stable base for PE-backed growth acceleration."
+        }
+      ],
       ebitda: "$5.1M",
       ebitdaNum: 5.1,
       revenue: "$27M",
@@ -504,6 +894,36 @@
       tier: "WARM",
       signals: ["REGULATORY TAILWIND", "SECTOR CONSOLIDATOR"],
       signalColors: ["blue", "red"],
+      signalDetails: [
+        {
+          type: "REGULATORY_TAILWIND",
+          label: "REGULATORY TAILWIND",
+          color: "blue",
+          confidence: 0.82,
+          detectedAt: "2026-02-08",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "Federal Register", dataPoint: "Updated Florida building codes mandating enhanced fire protection and life safety systems for commercial and multi-family properties" },
+            { provider: "IBISWorld", dataPoint: "Fire protection services market growing at 7.4% CAGR nationally; Sunbelt states leading growth due to construction volume" }
+          ],
+          narrative: "Cornerstone Fire Protection in Tampa benefits from new Florida building codes driving demand growth in fire protection and life safety services across the high-growth Sunbelt construction market."
+        },
+        {
+          type: "SECTOR_CONSOLIDATOR",
+          label: "SECTOR CONSOLIDATOR",
+          color: "red",
+          confidence: 0.79,
+          detectedAt: "2026-02-12",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "20+ bolt-on fire protection candidates identified across Sunbelt states; average target revenue $3-8M" },
+            { provider: "S&P Capital IQ", dataPoint: "Fire and life safety services sector fragmentation index 0.79; PE-backed roll-ups emerging as dominant consolidation model" }
+          ],
+          narrative: "Cornerstone's 65% recurring inspection and monitoring revenue positions it as a natural Sunbelt consolidation platform with 20+ identified bolt-on candidates in the highly fragmented fire protection market."
+        }
+      ],
       ebitda: "$5.4M",
       ebitdaNum: 5.4,
       revenue: "$36M",
@@ -540,6 +960,36 @@
       tier: "WARM",
       signals: ["RECURRING MOAT", "ADD-ON MAGNET"],
       signalColors: ["emerald", "violet"],
+      signalDetails: [
+        {
+          type: "RECURRING_MOAT",
+          label: "RECURRING MOAT",
+          color: "emerald",
+          confidence: 0.81,
+          detectedAt: "2026-02-09",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "Multi-year claims administration contracts with 50+ carrier clients; AI-assisted claims triage technology differentiation" },
+            { provider: "IBISWorld", dataPoint: "TPA industry demonstrates 90%+ client retention; switching costs include data migration and regulatory compliance recertification" }
+          ],
+          narrative: "Granite Claims Management in Philadelphia holds multi-year contracts with 50+ carrier clients and differentiates through AI-assisted claims triage, creating a durable recurring moat in the TPA market."
+        },
+        {
+          type: "ADD_ON_MAGNET",
+          label: "ADD-ON MAGNET",
+          color: "violet",
+          confidence: 0.77,
+          detectedAt: "2026-02-13",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "Fragmented TPA market with 150+ independent administrators nationally; majority under $20M revenue" },
+            { provider: "Axial Network", dataPoint: "Four TPA owners in Mid-Atlantic region expressing interest in strategic combinations or partial liquidity events" }
+          ],
+          narrative: "Granite's technology-differentiated claims platform and 50+ carrier relationships position it as a natural roll-up acquirer in the highly fragmented TPA market with 150+ independent targets."
+        }
+      ],
       ebitda: "$6.9M",
       ebitdaNum: 6.9,
       revenue: "$44M",
@@ -576,6 +1026,36 @@
       tier: "WARM",
       signals: ["MANAGEMENT UPGRADE", "PLATFORM FATIGUE"],
       signalColors: ["teal", "red"],
+      signalDetails: [
+        {
+          type: "MANAGEMENT_UPGRADE",
+          label: "MANAGEMENT UPGRADE",
+          color: "teal",
+          confidence: 0.76,
+          detectedAt: "2026-02-11",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "LinkedIn Sales Navigator", dataPoint: "Key leadership gaps in VP Sales and VP Operations roles; high turnover among mid-level managers over past 18 months" },
+            { provider: "Glassdoor", dataPoint: "Employee reviews cite operational inefficiency and lack of professional management structure despite $48M revenue scale" }
+          ],
+          narrative: "Northwind IT Solutions in Chicago has $48M revenue but thin margins due to operational inefficiency and critical leadership gaps, creating a clear management upgrade value creation opportunity."
+        },
+        {
+          type: "PLATFORM_FATIGUE",
+          label: "PLATFORM FATIGUE",
+          color: "red",
+          confidence: 0.75,
+          detectedAt: "2026-02-14",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "Internal tools and client portal showing aging architecture; limited automation in staffing workflows and billing processes" },
+            { provider: "G2 Reviews", dataPoint: "Clients praise relationship quality but cite technology gaps versus larger MSP competitors in reporting and SLA management" }
+          ],
+          narrative: "Northwind's strong Fortune 500 client relationships are hampered by aging internal technology and operational inefficiency, with 300-400bps of margin improvement achievable through an institutional playbook."
+        }
+      ],
       ebitda: "$4.6M",
       ebitdaNum: 4.6,
       revenue: "$48M",
@@ -612,6 +1092,36 @@
       tier: "WARM",
       signals: ["CARVE-OUT CANDIDATE", "SECTOR CONSOLIDATOR"],
       signalColors: ["amber", "red"],
+      signalDetails: [
+        {
+          type: "CARVE_OUT_CANDIDATE",
+          label: "CARVE-OUT CANDIDATE",
+          color: "amber",
+          confidence: 0.80,
+          detectedAt: "2026-02-07",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "SEC EDGAR", dataPoint: "$1.5B industrial conglomerate disclosed divestiture plans for non-core precision machining division in strategic review filing" },
+            { provider: "S&P Capital IQ", dataPoint: "Parent company targeting portfolio simplification; Atlas division EBITDA margins 200bps below parent average indicating under-investment" }
+          ],
+          narrative: "Atlas Precision Components is a precision machining division being divested by a $1.5B conglomerate in Grand Rapids, with standalone EBITDA margins expandable by 200bps under dedicated PE ownership."
+        },
+        {
+          type: "SECTOR_CONSOLIDATOR",
+          label: "SECTOR CONSOLIDATOR",
+          color: "red",
+          confidence: 0.77,
+          detectedAt: "2026-02-10",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "IBISWorld", dataPoint: "Precision machining industry in Great Lakes region features 120+ independent shops; consolidation trend accelerating" },
+            { provider: "PitchBook", dataPoint: "Five PE-backed precision manufacturing platforms completed acquisitions in Midwest in trailing 12 months" }
+          ],
+          narrative: "Atlas's strong aerospace and defense customer base positions it as a platform for Great Lakes precision manufacturing consolidation, with carve-out complexity manageable using an experienced transition team."
+        }
+      ],
       ebitda: "$7.8M",
       ebitdaNum: 7.8,
       revenue: "$55M",
@@ -644,10 +1154,40 @@
       sector: "Industrial Services",
       subsector: "Water Treatment",
       location: "Orlando, FL",
-      score: 49,
+      score: 50,
       tier: "WARM",
       signals: ["REGULATORY TAILWIND", "ADD-ON MAGNET"],
       signalColors: ["blue", "violet"],
+      signalDetails: [
+        {
+          type: "REGULATORY_TAILWIND",
+          label: "REGULATORY TAILWIND",
+          color: "blue",
+          confidence: 0.79,
+          detectedAt: "2026-02-10",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "Federal Register", dataPoint: "EPA PFAS regulations expanding mandated testing and remediation requirements for municipal and industrial water systems" },
+            { provider: "LexisNexis", dataPoint: "PFAS compliance timelines extending through 2030; estimated $12B in cumulative remediation spend nationally" }
+          ],
+          narrative: "Clearwater Environmental Group in Orlando is positioned to benefit from multi-year PFAS regulatory tailwinds driving demand for water treatment and compliance services across Sunbelt states."
+        },
+        {
+          type: "ADD_ON_MAGNET",
+          label: "ADD-ON MAGNET",
+          color: "violet",
+          confidence: 0.76,
+          detectedAt: "2026-02-15",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "IBISWorld", dataPoint: "Water treatment services market highly fragmented across Sunbelt states; 200+ independent operators under $15M revenue" },
+            { provider: "PitchBook", dataPoint: "Three PE-backed water treatment platforms actively acquiring in Southeast; average add-on multiple 5-7x EBITDA" }
+          ],
+          narrative: "Clearwater's Florida base and PFAS-driven demand growth create a compelling platform for water treatment consolidation across the fragmented Sunbelt market with significant add-on opportunities."
+        }
+      ],
       ebitda: "$4.2M",
       ebitdaNum: 4.2,
       revenue: "$29M",
@@ -684,6 +1224,36 @@
       tier: "WARM",
       signals: ["FOUNDER SUCCESSION", "SECTOR CONSOLIDATOR"],
       signalColors: ["emerald", "red"],
+      signalDetails: [
+        {
+          type: "FOUNDER_SUCCESSION",
+          label: "FOUNDER SUCCESSION",
+          color: "emerald",
+          confidence: 0.78,
+          detectedAt: "2026-02-06",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "Axial Network", dataPoint: "Second-generation owner in Dallas exploring options; contacted two regional investment banks for exploratory conversations" },
+            { provider: "PrivCo", dataPoint: "Heritage Building Products under family ownership since founding; no institutional investors or third-generation succession identified" }
+          ],
+          narrative: "Heritage Building Products second-generation owner in Dallas is exploring strategic options including investment bank engagement, signaling a succession-driven liquidity opportunity for the $9.4M EBITDA distributor."
+        },
+        {
+          type: "SECTOR_CONSOLIDATOR",
+          label: "SECTOR CONSOLIDATOR",
+          color: "red",
+          confidence: 0.76,
+          detectedAt: "2026-02-11",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "IBISWorld", dataPoint: "Building products distribution in Texas growing at 4.5% CAGR; fragmented market with 100+ independent distributors" },
+            { provider: "S&P Capital IQ", dataPoint: "Housing recovery providing near-term tailwind; PE-backed building products platforms reporting 8-12% organic growth in Sunbelt" }
+          ],
+          narrative: "Heritage's $82M revenue Texas base and steady cash flows position it for building products distribution consolidation, with margin improvement achievable through procurement optimization and ERP implementation."
+        }
+      ],
       ebitda: "$9.4M",
       ebitdaNum: 9.4,
       revenue: "$82M",
@@ -720,6 +1290,36 @@
       tier: "WARM",
       signals: ["PLATFORM FATIGUE", "MANAGEMENT UPGRADE"],
       signalColors: ["red", "teal"],
+      signalDetails: [
+        {
+          type: "PLATFORM_FATIGUE",
+          label: "PLATFORM FATIGUE",
+          color: "red",
+          confidence: 0.77,
+          detectedAt: "2026-02-13",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "Legacy staffing platform technology stack with limited automation; manual scheduling and credentialing workflows" },
+            { provider: "G2 Reviews", dataPoint: "Healthcare facility clients requesting digital credentialing and real-time scheduling capabilities not available on current platform" }
+          ],
+          narrative: "Beacon Healthcare Staffing in Columbus is constrained by legacy technology and manual workflows, with the founder-CEO stretched thin managing $64M revenue growth across 60+ healthcare facilities."
+        },
+        {
+          type: "MANAGEMENT_UPGRADE",
+          label: "MANAGEMENT UPGRADE",
+          color: "teal",
+          confidence: 0.75,
+          detectedAt: "2026-02-15",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "LinkedIn Sales Navigator", dataPoint: "Founder-CEO managing all functions without dedicated VP-level leadership; no COO, VP Sales, or VP Operations roles filled" },
+            { provider: "Glassdoor", dataPoint: "Employee reviews highlight strong client relationships but cite need for professional management layer and career development paths" }
+          ],
+          narrative: "Beacon's strong client relationships across Ohio and Pennsylvania are hampered by a founder-CEO stretched thin without professional management, with margins below industry benchmarks indicating clear improvement potential."
+        }
+      ],
       ebitda: "$5.6M",
       ebitdaNum: 5.6,
       revenue: "$64M",
@@ -758,6 +1358,36 @@
       tier: "NURTURE",
       signals: ["SECTOR CONSOLIDATOR", "REGULATORY TAILWIND"],
       signalColors: ["red", "blue"],
+      signalDetails: [
+        {
+          type: "SECTOR_CONSOLIDATOR",
+          label: "SECTOR CONSOLIDATOR",
+          color: "red",
+          confidence: 0.73,
+          detectedAt: "2026-02-09",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "Gulf Coast marine inspection and maintenance market features 40+ independent operators; three PE-backed platforms emerging" },
+            { provider: "IBISWorld", dataPoint: "Marine services industry consolidation driven by increasing regulatory complexity and capital requirements for compliance" }
+          ],
+          narrative: "Trident Marine Services in New Orleans operates in a fragmenting Gulf Coast marine services market with 40+ independent operators, though cyclicality concerns from O&G exposure warrant continued monitoring."
+        },
+        {
+          type: "REGULATORY_TAILWIND",
+          label: "REGULATORY TAILWIND",
+          color: "blue",
+          confidence: 0.71,
+          detectedAt: "2026-02-12",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "Federal Register", dataPoint: "Jones Act compliance requirements maintaining steady demand for domestic marine inspection and maintenance services" },
+            { provider: "Compliance Week", dataPoint: "Enhanced maritime safety regulations increasing inspection frequency requirements for commercial vessels in Gulf region" }
+          ],
+          narrative: "Jones Act compliance requirements and enhanced maritime safety regulations create steady demand for Trident's Gulf Coast marine inspection services, though EBITDA quality needs improvement before investment."
+        }
+      ],
       ebitda: "$3.8M",
       ebitdaNum: 3.8,
       revenue: "$31M",
@@ -794,6 +1424,36 @@
       tier: "NURTURE",
       signals: ["FOUNDER SUCCESSION", "ADD-ON MAGNET"],
       signalColors: ["emerald", "violet"],
+      signalDetails: [
+        {
+          type: "FOUNDER_SUCCESSION",
+          label: "FOUNDER SUCCESSION",
+          color: "emerald",
+          confidence: 0.74,
+          detectedAt: "2026-02-08",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "LinkedIn Sales Navigator", dataPoint: "Managing partner (age 66) planning retirement; succession plan not formalized within partnership structure" },
+            { provider: "Exit Planning Institute", dataPoint: "Mid-Atlantic CPA firm succession timeline estimated at 18-24 months; partner buyout economics under review" }
+          ],
+          narrative: "Provident Accounting Group managing partner at age 66 is planning retirement with no formalized succession plan, though the $3.2M EBITDA is below standalone platform threshold in Richmond."
+        },
+        {
+          type: "ADD_ON_MAGNET",
+          label: "ADD-ON MAGNET",
+          color: "violet",
+          confidence: 0.70,
+          detectedAt: "2026-02-14",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "Axial Network", dataPoint: "Multiple CPA firm owners in Mid-Atlantic region approaching retirement; partner succession crisis affecting 40% of firms" },
+            { provider: "IBISWorld", dataPoint: "Accounting industry consolidation accelerating; 60+ independent firms in Virginia and Maryland market seeking strategic options" }
+          ],
+          narrative: "Provident's audit and advisory practice in Richmond could serve as an add-on or reach scale through combination, as 40% of Mid-Atlantic CPA firms face partner succession challenges."
+        }
+      ],
       ebitda: "$3.2M",
       ebitdaNum: 3.2,
       revenue: "$18M",
@@ -830,6 +1490,36 @@
       tier: "NURTURE",
       signals: ["REGULATORY TAILWIND", "RECURRING MOAT"],
       signalColors: ["blue", "emerald"],
+      signalDetails: [
+        {
+          type: "REGULATORY_TAILWIND",
+          label: "REGULATORY TAILWIND",
+          color: "blue",
+          confidence: 0.72,
+          detectedAt: "2026-02-11",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "Federal Register", dataPoint: "ITAR compliance requirements tightening for defense supply chain participants; new cybersecurity maturity model certification (CMMC) mandates" },
+            { provider: "LexisNexis", dataPoint: "Defense procurement regulations expanding contractor compliance burden, favoring established ITAR-regulated suppliers" }
+          ],
+          narrative: "Patriot Defense Logistics in Virginia Beach benefits from tightening ITAR and CMMC compliance requirements that create barriers to entry for the defense supply chain and logistics market."
+        },
+        {
+          type: "RECURRING_MOAT",
+          label: "RECURRING MOAT",
+          color: "emerald",
+          confidence: 0.69,
+          detectedAt: "2026-02-13",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "Long-term defense contracts with ITAR-regulated customer base; average contract duration exceeding 3 years" },
+            { provider: "Gartner", dataPoint: "Defense logistics switching costs elevated due to security clearance requirements and supply chain certification processes" }
+          ],
+          narrative: "Patriot's ITAR-regulated customer base and long-term defense contracts create recurring revenue, though low margins from the pass-through distribution model and government concentration risk remain concerns."
+        }
+      ],
       ebitda: "$4.5M",
       ebitdaNum: 4.5,
       revenue: "$52M",
@@ -866,6 +1556,36 @@
       tier: "NURTURE",
       signals: ["ADD-ON MAGNET", "MANAGEMENT UPGRADE"],
       signalColors: ["violet", "teal"],
+      signalDetails: [
+        {
+          type: "ADD_ON_MAGNET",
+          label: "ADD-ON MAGNET",
+          color: "violet",
+          confidence: 0.72,
+          detectedAt: "2026-02-10",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "Arizona commercial HVAC market features 30+ independent operators under $10M revenue suitable for tuck-in acquisitions" },
+            { provider: "GF Data", dataPoint: "HVAC services add-on multiples ranging 4-6x EBITDA for sub-$5M EBITDA targets in Sunbelt markets" }
+          ],
+          narrative: "Skyline HVAC Holdings in Phoenix has strong recurring maintenance revenue but needs to reach $5M+ EBITDA before viable as a platform, with 30+ tuck-in targets identified in Arizona."
+        },
+        {
+          type: "MANAGEMENT_UPGRADE",
+          label: "MANAGEMENT UPGRADE",
+          color: "teal",
+          confidence: 0.68,
+          detectedAt: "2026-02-16",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "LinkedIn Sales Navigator", dataPoint: "Owner-operator managing all functions with no professional management layer; limited back-office infrastructure at $26M revenue" },
+            { provider: "Glassdoor", dataPoint: "Employee reviews indicate operational talent but lack of formal processes and career development structure" }
+          ],
+          narrative: "Skyline's below-threshold $3.5M EBITDA and lack of professional management require monitoring for organic growth trajectory before the Phoenix commercial HVAC platform becomes investable."
+        }
+      ],
       ebitda: "$3.5M",
       ebitdaNum: 3.5,
       revenue: "$26M",
@@ -902,6 +1622,36 @@
       tier: "NURTURE",
       signals: ["PLATFORM FATIGUE", "RECURRING MOAT"],
       signalColors: ["red", "emerald"],
+      signalDetails: [
+        {
+          type: "PLATFORM_FATIGUE",
+          label: "PLATFORM FATIGUE",
+          color: "red",
+          confidence: 0.72,
+          detectedAt: "2026-02-12",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "Niche analytics platform for food and beverage industry showing limited feature development velocity; founder-constrained R&D budget" },
+            { provider: "StackShare", dataPoint: "Technology stack adequate but not scaling; lack of cloud-native architecture limits enterprise adoption potential" }
+          ],
+          narrative: "Crestview Data Analytics in Portland has interesting IP but below-scale $3.1M EBITDA, with the founder constrained from investing in the product roadmap needed to reach critical mass in food and beverage analytics."
+        },
+        {
+          type: "RECURRING_MOAT",
+          label: "RECURRING MOAT",
+          color: "emerald",
+          confidence: 0.73,
+          detectedAt: "2026-02-14",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "90% SaaS revenue with strong retention metrics; embedded in client supply chain and quality control workflows" },
+            { provider: "Gartner", dataPoint: "Food and beverage analytics market growing at 9% CAGR; limited direct SaaS competitors in the niche vertical" }
+          ],
+          narrative: "Crestview's 90% SaaS revenue and strong retention create a defensible niche in food and beverage analytics, making it a compelling add-on candidate for an existing portfolio company at current EBITDA scale."
+        }
+      ],
       ebitda: "$3.1M",
       ebitdaNum: 3.1,
       revenue: "$16M",
@@ -938,6 +1688,36 @@
       tier: "NURTURE",
       signals: ["SECTOR CONSOLIDATOR", "MANAGEMENT UPGRADE"],
       signalColors: ["red", "teal"],
+      signalDetails: [
+        {
+          type: "SECTOR_CONSOLIDATOR",
+          label: "SECTOR CONSOLIDATOR",
+          color: "red",
+          confidence: 0.70,
+          detectedAt: "2026-02-11",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "IBISWorld", dataPoint: "California light industrial staffing market highly fragmented with 300+ independent operators; top 10 firms hold less than 20% share" },
+            { provider: "PitchBook", dataPoint: "PE-backed staffing platforms accelerating West Coast consolidation; four roll-ups completed in trailing 12 months" }
+          ],
+          narrative: "Redwood Staffing Partners in Sacramento operates in a highly fragmented California light industrial staffing market with 300+ operators, though significant profitability improvement is needed before platform viability."
+        },
+        {
+          type: "MANAGEMENT_UPGRADE",
+          label: "MANAGEMENT UPGRADE",
+          color: "teal",
+          confidence: 0.68,
+          detectedAt: "2026-02-16",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "LinkedIn Sales Navigator", dataPoint: "Owner-operator structure with no professional management team; high revenue ($42M) but low margins indicating operational inefficiency" },
+            { provider: "Glassdoor", dataPoint: "Employee reviews cite need for improved processes, technology investment, and professional development infrastructure" }
+          ],
+          narrative: "Redwood's $42M revenue but low margins reflect significant management and operational improvement needs, with potential synergy through combination with the Beacon Healthcare Staffing thesis."
+        }
+      ],
       ebitda: "$3.4M",
       ebitdaNum: 3.4,
       revenue: "$42M",
@@ -976,6 +1756,36 @@
       tier: "STRATEGIC",
       signals: ["CARVE-OUT CANDIDATE", "SECTOR CONSOLIDATOR"],
       signalColors: ["amber", "red"],
+      signalDetails: [
+        {
+          type: "CARVE_OUT_CANDIDATE",
+          label: "CARVE-OUT CANDIDATE",
+          color: "amber",
+          confidence: 0.67,
+          detectedAt: "2026-02-07",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "SEC EDGAR", dataPoint: "Asian shipping conglomerate parent disclosed potential divestiture of West Coast logistics operations in annual report" },
+            { provider: "Bloomberg", dataPoint: "Parent company strategic review driven by portfolio simplification; Pacific Rim operations identified as non-core to Asian trade lane focus" }
+          ],
+          narrative: "Pacific Rim Logistics in Long Beach is a potential carve-out from an Asian shipping conglomerate, though the $114M EV exceeds ACP's typical check size and falls outside core sector expertise."
+        },
+        {
+          type: "SECTOR_CONSOLIDATOR",
+          label: "SECTOR CONSOLIDATOR",
+          color: "red",
+          confidence: 0.63,
+          detectedAt: "2026-02-13",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "West Coast freight and logistics sector seeing increased PE consolidation activity; 6 platform deals in trailing 18 months" },
+            { provider: "Preqin", dataPoint: "Logistics sector fundraising up 35% YoY; multiple sector-specialist funds actively deploying in West Coast markets" }
+          ],
+          narrative: "Pacific Rim's West Coast logistics operations present a strategic watch opportunity, with potential partnership with a sector-specialist co-investor needed given the above-threshold check size."
+        }
+      ],
       ebitda: "$14.2M",
       ebitdaNum: 14.2,
       revenue: "$120M",
@@ -1012,6 +1822,36 @@
       tier: "STRATEGIC",
       signals: ["REGULATORY TAILWIND", "ADD-ON MAGNET"],
       signalColors: ["blue", "violet"],
+      signalDetails: [
+        {
+          type: "REGULATORY_TAILWIND",
+          label: "REGULATORY TAILWIND",
+          color: "blue",
+          confidence: 0.65,
+          detectedAt: "2026-02-09",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "Federal Register", dataPoint: "Mental health parity enforcement strengthening; new CMS behavioral health reimbursement codes expanding coverage scope" },
+            { provider: "IBISWorld", dataPoint: "Behavioral health services market growing at 8.5% CAGR driven by mental health parity laws and expanded insurance coverage" }
+          ],
+          narrative: "Magnolia Health Systems in Memphis benefits from mental health parity law enforcement and expanded reimbursement, though regulatory complexity and reimbursement risk fall outside ACP's core competency."
+        },
+        {
+          type: "ADD_ON_MAGNET",
+          label: "ADD-ON MAGNET",
+          color: "violet",
+          confidence: 0.62,
+          detectedAt: "2026-02-15",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "Southeast behavioral health market features 100+ independent providers suitable for consolidation; average target revenue $3-10M" },
+            { provider: "Axial Network", dataPoint: "Multiple behavioral health practice owners in Tennessee and surrounding states exploring strategic options due to operational burden" }
+          ],
+          narrative: "Magnolia's $6.8M EBITDA behavioral health platform in Memphis has attractive market dynamics for add-on consolidation, but remains a strategic watch as ACP builds sector expertise and evaluates reimbursement risk."
+        }
+      ],
       ebitda: "$6.8M",
       ebitdaNum: 6.8,
       revenue: "$45M",
@@ -1048,6 +1888,36 @@
       tier: "STRATEGIC",
       signals: ["CARVE-OUT CANDIDATE", "RECURRING MOAT"],
       signalColors: ["amber", "emerald"],
+      signalDetails: [
+        {
+          type: "CARVE_OUT_CANDIDATE",
+          label: "CARVE-OUT CANDIDATE",
+          color: "amber",
+          confidence: 0.64,
+          detectedAt: "2026-02-08",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "SEC EDGAR", dataPoint: "UK parent company disclosed divestiture plans for non-core aerospace aftermarket operations in half-year trading update" },
+            { provider: "S&P Capital IQ", dataPoint: "Sterling Aerospace identified as non-strategic asset; parent pursuing UK defense prime contractor strategy requiring capital redeployment" }
+          ],
+          narrative: "Sterling Aerospace Components in Wichita is being divested by its UK parent as a non-core asset, though the $93M EV is above ACP's target and falls outside core sector focus."
+        },
+        {
+          type: "RECURRING_MOAT",
+          label: "RECURRING MOAT",
+          color: "emerald",
+          confidence: 0.61,
+          detectedAt: "2026-02-12",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "BuiltWith", dataPoint: "Strong recurring revenue from MRO contracts with aerospace OEMs; average contract duration 4+ years with auto-renewal provisions" },
+            { provider: "Gartner", dataPoint: "Aerospace aftermarket parts distribution benefits from FAA certification requirements creating 24-36 month switching barriers" }
+          ],
+          narrative: "Sterling's MRO contract base and FAA-certified aftermarket parts distribution create a durable recurring moat, though ACP is tracking for potential co-investment with an aerospace-specialist fund."
+        }
+      ],
       ebitda: "$11.6M",
       ebitdaNum: 11.6,
       revenue: "$78M",
@@ -1084,6 +1954,36 @@
       tier: "STRATEGIC",
       signals: ["REGULATORY TAILWIND", "SECTOR CONSOLIDATOR"],
       signalColors: ["blue", "red"],
+      signalDetails: [
+        {
+          type: "REGULATORY_TAILWIND",
+          label: "REGULATORY TAILWIND",
+          color: "blue",
+          confidence: 0.63,
+          detectedAt: "2026-02-10",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "Federal Register", dataPoint: "Extended Producer Responsibility (EPR) legislation advancing in Oregon and Washington; mandating producer-funded recycling programs" },
+            { provider: "IBISWorld", dataPoint: "Waste and recycling services market in Pacific Northwest growing at 6.8% CAGR driven by EPR mandates and sustainability regulation" }
+          ],
+          narrative: "Evergreen Waste Solutions in Portland benefits from EPR legislation driving long-term demand, though the capital-intensive waste management business model falls outside ACP's typical investment profile."
+        },
+        {
+          type: "SECTOR_CONSOLIDATOR",
+          label: "SECTOR CONSOLIDATOR",
+          color: "red",
+          confidence: 0.60,
+          detectedAt: "2026-02-14",
+          lastVerified: "2026-02-24",
+          status: "ACTIVE",
+          sources: [
+            { provider: "PitchBook", dataPoint: "Pacific Northwest waste services market features 50+ independent operators; PE-backed platforms actively acquiring in adjacent Western states" },
+            { provider: "Preqin", dataPoint: "Waste management sector attracting increased PE interest; three new sector-focused funds raised in past 18 months totaling $2.5B" }
+          ],
+          narrative: "Evergreen's $8.3M EBITDA Pacific Northwest waste platform has consolidation potential across 50+ operators, but ACP is monitoring for a potential entry through the less capital-intensive services segment."
+        }
+      ],
       ebitda: "$8.3M",
       ebitdaNum: 8.3,
       revenue: "$56M",
@@ -1791,6 +2691,25 @@
     var prospects = tier ? Data.getProspectsByTier(tier) : Data.prospects;
     var total = prospects.reduce(function(sum, p) { return sum + p.ebitdaNum; }, 0);
     return '$' + total.toFixed(1) + 'M';
+  };
+
+
+  Data.getSignalSummary = function() {
+    var summary = { totalActiveSignals: 0, signalsByType: {}, avgConfidence: 0 };
+    var confSum = 0, confCount = 0;
+    Data.prospects.forEach(function(p) {
+      if (!p.signalDetails) return;
+      p.signalDetails.forEach(function(s) {
+        if (s.status === 'ACTIVE') {
+          summary.totalActiveSignals++;
+          summary.signalsByType[s.type] = (summary.signalsByType[s.type] || 0) + 1;
+          confSum += s.confidence;
+          confCount++;
+        }
+      });
+    });
+    summary.avgConfidence = confCount > 0 ? Math.round((confSum / confCount) * 100) / 100 : 0;
+    return summary;
   };
 
 

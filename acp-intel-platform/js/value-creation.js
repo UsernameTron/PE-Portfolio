@@ -24,7 +24,8 @@
 
     // Core PE value creation math
     var entryEV = _vals.ebitda * _vals.multiple;
-    var exitMultiple = _vals.multiple + 1.5;
+    var EXIT_MULTIPLE_EXPANSION = 1.5;
+    var exitMultiple = _vals.multiple + EXIT_MULTIPLE_EXPANSION;
     var exitEBITDA = _vals.ebitda * Math.pow(1 + _vals.growth / 100, _vals.holdPeriod);
     var exitEV = exitEBITDA * exitMultiple;
     var moic = exitEV / entryEV;
@@ -135,21 +136,26 @@
     container.appendChild(sub);
 
     // 4 Sliders
+    var _addListener = function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); };
     container.appendChild(Components.RangeSlider({
       label: 'Entry EBITDA ($M)', min: 3, max: 15, value: 8, step: 0.5, prefix: '$', suffix: 'M',
-      onChange: function(v) { _vals.ebitda = v; updateAll(); }
+      onChange: function(v) { _vals.ebitda = v; updateAll(); },
+      onAddListener: _addListener
     }));
     container.appendChild(Components.RangeSlider({
       label: 'Entry EV/EBITDA Multiple', min: 5, max: 12, value: 7, step: 0.5, suffix: 'x',
-      onChange: function(v) { _vals.multiple = v; updateAll(); }
+      onChange: function(v) { _vals.multiple = v; updateAll(); },
+      onAddListener: _addListener
     }));
     container.appendChild(Components.RangeSlider({
       label: 'Hold Period (years)', min: 3, max: 7, value: 5, step: 1,
-      onChange: function(v) { _vals.holdPeriod = v; updateAll(); }
+      onChange: function(v) { _vals.holdPeriod = v; updateAll(); },
+      onAddListener: _addListener
     }));
     container.appendChild(Components.RangeSlider({
       label: 'Annual EBITDA Growth (%)', min: 5, max: 30, value: 15, step: 1, suffix: '%',
-      onChange: function(v) { _vals.growth = v; updateAll(); }
+      onChange: function(v) { _vals.growth = v; updateAll(); },
+      onAddListener: _addListener
     }));
 
     // Economics section

@@ -6,6 +6,7 @@
   var _panel = null;
   var _timers = [];
   var _listeners = [];
+  var _destroyed = false;
   var _simRunning = false;
   var _simPaused = false;
   var _simIndex = 0;
@@ -54,7 +55,7 @@
   }
 
   function runSimulation() {
-    if (_simIndex >= _allSteps.length || !_simRunning || _simPaused) return;
+    if (_destroyed || _simIndex >= _allSteps.length || !_simRunning || _simPaused) return;
     var step = _allSteps[_simIndex];
     var entry = Components.FeedEntry({ agent: step.agent.toUpperCase(), color: step.color, time: step.time, text: step.text });
     entry.style.opacity = '0';
@@ -85,6 +86,7 @@
     var runBtn = Components.ActionButton({
       label: !_simRunning ? 'Run Agent Chain' : _simPaused ? 'Resume' : 'Pause',
       variant: 'primary',
+      onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); },
       onClick: function() {
         if (!_simRunning) {
           _simRunning = true;
@@ -108,6 +110,7 @@
       var resetBtn = Components.ActionButton({
         label: 'Reset',
         variant: 'ghost',
+        onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); },
         onClick: function() {
           _simRunning = false;
           _simPaused = false;
@@ -136,6 +139,7 @@
   function init(container, panel) {
     _container = container;
     _panel = panel;
+    _destroyed = false;
     _simRunning = false;
     _simPaused = false;
     _simIndex = 0;
@@ -169,6 +173,7 @@
   }
 
   function destroy() {
+    _destroyed = true;
     _simRunning = false;
     _simPaused = false;
     _timers.forEach(function(id) { clearInterval(id); clearTimeout(id); });

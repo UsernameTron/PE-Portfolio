@@ -51,7 +51,11 @@
     comp.strengths.forEach(function(s) {
       var item = document.createElement('div');
       item.className = 'body-sm cm-list-item';
-      item.innerHTML = '<span style="color:var(--emerald)">+</span> ' + s;
+      var plus = document.createElement('span');
+      plus.style.color = 'var(--emerald)';
+      plus.textContent = '+';
+      item.appendChild(plus);
+      item.appendChild(document.createTextNode(' ' + s));
       card.appendChild(item);
     });
 
@@ -64,7 +68,11 @@
     comp.vulnerabilities.forEach(function(v) {
       var item = document.createElement('div');
       item.className = 'body-sm cm-list-item';
-      item.innerHTML = '<span style="color:var(--red)">\u2212</span> ' + v;
+      var minus = document.createElement('span');
+      minus.style.color = 'var(--red)';
+      minus.textContent = '\u2212';
+      item.appendChild(minus);
+      item.appendChild(document.createTextNode(' ' + v));
       card.appendChild(item);
     });
 

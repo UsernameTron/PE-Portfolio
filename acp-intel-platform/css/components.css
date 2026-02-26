@@ -37,6 +37,9 @@
 .signal-badge--emerald { color: var(--emerald); background: var(--emerald-muted); }
 .signal-badge--amber   { color: var(--amber); background: var(--amber-muted); }
 .signal-badge--blue    { color: var(--blue); background: var(--blue-muted); }
+.signal-badge--red     { color: var(--red); background: var(--red-muted); }
+.signal-badge--violet  { color: var(--violet); background: var(--violet-muted); }
+.signal-badge--teal    { color: var(--teal); background: var(--teal-muted); }
 .signal-badge--gray    { color: var(--text-muted); background: var(--surface-alt); }
 
 /* ═══ CIRCULAR SCORE ═══ */
@@ -160,6 +163,18 @@
 }
 .feed-entry-time { color: var(--text-faint); font-size: 11px; }
 .feed-entry-text { margin: 0; line-height: 1.4; }
+
+/* ═══ SIGNAL DETAIL CARD ═══ */
+.signal-detail-card { padding: var(--space-3); border: 1px solid var(--border);
+  border-radius: var(--radius-md); margin-bottom: var(--space-2); background: var(--surface); }
+.signal-detail-header { display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: var(--space-2); }
+.signal-confidence { font-size: var(--text-xs); }
+.signal-sources { margin: var(--space-2) 0; }
+.signal-source { padding: var(--space-1) 0; border-bottom: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: var(--space-1); }
+.signal-source-provider { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 1px; }
+.signal-details-section { margin-top: var(--space-4); }
 
 /* ═══ LIVE PULSE ANIMATION ═══ */
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }

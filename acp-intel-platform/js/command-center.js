@@ -28,6 +28,10 @@
     heroGrid.appendChild(Components.KPICard({ label: 'HOT DEALS', value: String(counts.HOT), subtitle: 'Active deal pipeline', valueColor: 'red' }));
     heroGrid.appendChild(Components.KPICard({ label: 'ACTIVE FUND', value: 'Fund III', subtitle: '$620M | Oct 2022 vintage', valueColor: 'amber' }));
     heroGrid.appendChild(Components.KPICard({ label: 'PIPELINE EV', value: Data.getAggregateEV(), subtitle: 'Aggregate enterprise value' }));
+    if (Data.getSignalSummary) {
+      var signalSummary = Data.getSignalSummary();
+      heroGrid.appendChild(Components.KPICard({ label: 'ACTIVE SIGNALS', value: String(signalSummary.totalActiveSignals), subtitle: 'Avg confidence: ' + signalSummary.avgConfidence, valueColor: 'emerald' }));
+    }
     container.appendChild(heroGrid);
 
     // ── Market Pulse ──
@@ -62,7 +66,8 @@
         var filtered = tier === 'ALL' ? Data.prospects : Data.prospects.filter(function(p) { return p.tier === tier; });
         filtered.sort(function(a, b) { return b.score - a.score; });
         if (_tableEl) _tableEl.updateRows(filtered);
-      }
+      },
+      onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); }
     });
     container.appendChild(filterBar);
 
@@ -85,7 +90,8 @@
         { key: 'processStage', label: 'Stage' },
         { key: 'tier', label: 'Tier', format: function(v) { return Components.TierBadge(v).outerHTML; }}
       ],
-      rows: sorted
+      rows: sorted,
+      onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); }
     });
     container.appendChild(_tableEl);
 

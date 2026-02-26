@@ -55,7 +55,7 @@
       '<div>Stage: <span style="color:var(--red)">' + prospect.processStage + '</span></div>';
     card.appendChild(stats);
 
-    card.addEventListener('click', function() { openDetail(prospect); });
+    _on(card, 'click', function() { openDetail(prospect); });
     return card;
   }
 
@@ -67,7 +67,7 @@
     var closeBtn = document.createElement('button');
     closeBtn.className = 'pi-close-btn';
     closeBtn.innerHTML = '&times;';
-    closeBtn.addEventListener('click', function() {
+    _on(closeBtn, 'click', function() {
       _panel.classList.remove('pi-panel-open');
       _panel.innerHTML = '';
     });
@@ -159,9 +159,35 @@
       var kiTable = document.createElement('div');
       kiTable.className = 'pi-ki-table';
       p.keyIntelligence.forEach(function(item) {
-        kiTable.innerHTML += '<div class="pi-ki-row"><span class="body-sm" style="color:var(--text-muted)">' + item.label + '</span><span class="body-sm">' + item.value + '</span></div>';
+        var kiRow = document.createElement('div');
+        kiRow.className = 'pi-ki-row';
+        var kiLabel = document.createElement('span');
+        kiLabel.className = 'body-sm';
+        kiLabel.style.color = 'var(--text-muted)';
+        kiLabel.textContent = item.label;
+        var kiValue = document.createElement('span');
+        kiValue.className = 'body-sm';
+        kiValue.textContent = item.value;
+        kiRow.appendChild(kiLabel);
+        kiRow.appendChild(kiValue);
+        kiTable.appendChild(kiRow);
       });
       _panel.appendChild(kiTable);
+    }
+
+    // Signal intelligence
+    if (p.signalDetails && p.signalDetails.length > 0) {
+      var signalSection = document.createElement('div');
+      signalSection.className = 'signal-details-section';
+      var signalHeader = document.createElement('div');
+      signalHeader.className = 'label-lg';
+      signalHeader.textContent = 'SIGNAL INTELLIGENCE';
+      signalHeader.style.margin = 'var(--space-4) 0 var(--space-2)';
+      signalSection.appendChild(signalHeader);
+      p.signalDetails.forEach(function(s) {
+        signalSection.appendChild(Components.SignalDetailCard({ signal: s }));
+      });
+      _panel.appendChild(signalSection);
     }
 
     // Notes
@@ -212,7 +238,8 @@
       onSelect: function(tier) {
         var filtered = tier === 'ALL' ? Data.prospects.slice() : Data.prospects.filter(function(p) { return p.tier === tier; });
         renderCards(filtered);
-      }
+      },
+      onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); }
     });
     container.appendChild(filterBar);
 

@@ -14,6 +14,7 @@
   var DEFAULT_MODULE = 'command-center';
   var activeModule = null;
   var activeInstance = null;
+  var loadingId = null;
 
   var contentMain = document.getElementById('content-main');
   var contentPanel = document.getElementById('content-panel');
@@ -33,7 +34,10 @@
       link.rel = 'stylesheet';
       link.href = mod.css;
       link.onload = function() { mod._cssLoaded = true; resolve(); };
-      link.onerror = resolve;
+      link.onerror = function() {
+        console.error('[ACP] Failed to load CSS: ' + mod.css);
+        resolve();
+      };
       document.head.appendChild(link);
     });
   }
@@ -46,7 +50,10 @@
       var script = document.createElement('script');
       script.src = mod.js;
       script.onload = function() { mod.loaded = true; resolve(); };
-      script.onerror = resolve;
+      script.onerror = function() {
+        console.error('[ACP] Failed to load JS: ' + mod.js);
+        resolve();
+      };
       document.body.appendChild(script);
     });
   }
@@ -65,14 +72,21 @@
   // ── Load Module ──
   function loadModule(id) {
     if (id === activeModule) return;
+    loadingId = id;
 
     destroyCurrentModule();
     Shell.activateNavTab(id);
+
+    // Loading indicator — prevents blank screen flash during async CSS/JS load
+    contentMain.innerHTML = '<div style="padding:40px;color:var(--text-muted)" class="label-sm">Loading...</div>';
 
     // Lazy-load CSS then JS, then init
     injectCSS(id).then(function() {
       return injectJS(id);
     }).then(function() {
+      if (loadingId !== id) return; // Guard: another load started
+      contentMain.innerHTML = '';
+      contentPanel.innerHTML = '';
       var mod = window.modules && window.modules[id];
       if (mod && typeof mod.init === 'function') {
         activeModule = id;

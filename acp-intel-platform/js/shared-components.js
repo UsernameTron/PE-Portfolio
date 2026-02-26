@@ -4,14 +4,30 @@
 
   var C = {}; // Component namespace
 
+  // Listener tracking helper — components call this to register cleanup
+  function trackListener(opts, el, event, handler) {
+    el.addEventListener(event, handler);
+    if (opts.onAddListener) {
+      opts.onAddListener(el, event, handler);
+    }
+  }
+
+  // XSS-safe text escaping — cached element avoids createElement per call
+  var _escDiv = document.createElement('div');
+  function esc(str) {
+    if (str == null) return '';
+    _escDiv.textContent = String(str);
+    return _escDiv.innerHTML;
+  }
+
   // ── 4.1.1 KPI Card ──
   C.KPICard = function(opts) {
     var el = document.createElement('div');
     el.className = 'kpi-card';
     el.innerHTML =
-      '<span class="kpi-card-label label-sm">' + opts.label + '</span>' +
-      '<span class="kpi-card-value display-' + (opts.size || 'lg') + '">' + opts.value + '</span>' +
-      (opts.subtitle ? '<span class="kpi-card-subtitle body-sm">' + opts.subtitle + '</span>' : '');
+      '<span class="kpi-card-label label-sm">' + esc(opts.label) + '</span>' +
+      '<span class="kpi-card-value display-' + (opts.size || 'lg') + '">' + esc(opts.value) + '</span>' +
+      (opts.subtitle ? '<span class="kpi-card-subtitle body-sm">' + esc(opts.subtitle) + '</span>' : '');
     if (opts.valueColor) el.querySelector('.kpi-card-value').style.color = 'var(--' + opts.valueColor + ')';
     return el;
   };
@@ -143,7 +159,7 @@
     }
     updateFill();
 
-    input.addEventListener('input', function() {
+    trackListener(opts, input, 'input', function() {
       valueDisplay.textContent = opts.prefix ? opts.prefix + input.value : input.value;
       if (opts.suffix) valueDisplay.textContent += opts.suffix;
       updateFill();
@@ -186,7 +202,7 @@
       btn.innerHTML = tab.label + ' <span class="filter-tab-count">' + tab.count + '</span>';
       if (tab.color && i === 0) btn.style.background = 'var(--' + tab.color + ')';
 
-      btn.addEventListener('click', function() {
+      trackListener(opts, btn, 'click', function() {
         el.querySelectorAll('.filter-tab').forEach(function(t) {
           t.classList.remove('active');
           t.style.background = '';
@@ -207,8 +223,8 @@
     var el = document.createElement('div');
     el.className = 'callout-box callout-box--' + (opts.color || 'emerald');
     el.innerHTML =
-      (opts.title ? '<span class="callout-box-title label-sm">' + opts.title + '</span>' : '') +
-      '<p class="callout-box-text body-sm">' + opts.text + '</p>';
+      (opts.title ? '<span class="callout-box-title label-sm">' + esc(opts.title) + '</span>' : '') +
+      '<p class="callout-box-text body-sm">' + esc(opts.text) + '</p>';
     return el;
   };
 
@@ -217,7 +233,7 @@
     var el = document.createElement('button');
     el.className = 'action-btn action-btn--' + (opts.variant || 'primary');
     el.textContent = opts.label;
-    if (opts.onClick) el.addEventListener('click', opts.onClick);
+    if (opts.onClick) trackListener(opts, el, 'click', opts.onClick);
     return el;
   };
 
@@ -262,7 +278,7 @@
         });
         if (opts.onRowClick) {
           tr.style.cursor = 'pointer';
-          tr.addEventListener('click', function() { opts.onRowClick(row); });
+          trackListener(opts, tr, 'click', function() { opts.onRowClick(row); });
         }
         tbody.appendChild(tr);
       });
@@ -285,10 +301,55 @@
     el.style.borderLeftColor = 'var(--' + opts.color + ')';
     el.innerHTML =
       '<div class="feed-entry-header">' +
-        '<span class="feed-entry-agent mono-sm" style="color:var(--' + opts.color + ');background:var(--' + opts.color + '-muted)">' + opts.agent + '</span>' +
-        '<span class="feed-entry-time body-sm">' + opts.time + '</span>' +
+        '<span class="feed-entry-agent mono-sm" style="color:var(--' + esc(opts.color) + ');background:var(--' + esc(opts.color) + '-muted)">' + esc(opts.agent) + '</span>' +
+        '<span class="feed-entry-time body-sm">' + esc(opts.time) + '</span>' +
       '</div>' +
-      '<p class="feed-entry-text body-sm">' + opts.text + '</p>';
+      '<p class="feed-entry-text body-sm">' + esc(opts.text) + '</p>';
+    return el;
+  };
+
+  // ── 4.1.12 Signal Detail Card ──
+  C.SignalDetailCard = function(opts) {
+    var s = opts.signal;
+    if (!s || !s.label) return document.createDocumentFragment();
+
+    var el = document.createElement('div');
+    el.className = 'signal-detail-card';
+
+    var header = document.createElement('div');
+    header.className = 'signal-detail-header';
+    header.appendChild(C.SignalBadge(s.label, s.color));
+
+    var conf = document.createElement('span');
+    conf.className = 'signal-confidence mono-sm';
+    conf.textContent = Math.round(s.confidence * 100) + '% confidence';
+    conf.style.color = 'var(--text-muted)';
+    header.appendChild(conf);
+    el.appendChild(header);
+
+    if (s.sources && s.sources.length > 0) {
+      var srcList = document.createElement('div');
+      srcList.className = 'signal-sources';
+      s.sources.forEach(function(src) {
+        var srcEl = document.createElement('div');
+        srcEl.className = 'signal-source body-sm';
+        var provider = document.createElement('span');
+        provider.className = 'signal-source-provider mono-sm';
+        provider.textContent = src.provider;
+        provider.style.color = 'var(--' + s.color + ')';
+        var dp = document.createElement('span');
+        dp.textContent = src.dataPoint;
+        srcEl.appendChild(provider);
+        srcEl.appendChild(dp);
+        srcList.appendChild(srcEl);
+      });
+      el.appendChild(srcList);
+    }
+
+    // Do not esc() narrative here — CalloutBox handles its own escaping
+    if (s.narrative) {
+      el.appendChild(C.CalloutBox({ color: s.color, title: 'SIGNAL ANALYSIS', text: s.narrative }));
+    }
     return el;
   };
 

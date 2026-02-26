@@ -109,7 +109,7 @@
       var btn = document.createElement('button');
       btn.className = 'ss-preset-btn';
       btn.textContent = name;
-      btn.addEventListener('click', function() {
+      _on(btn, 'click', function() {
         presetRow.querySelectorAll('.ss-preset-btn').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         var vals = PRESETS[name];
@@ -129,7 +129,8 @@
       var slider = Components.RangeSlider({
         label: label,
         min: 0, max: 100, value: defaults[i],
-        onChange: function(v) { sliderObj.val = v; updatePanel(); }
+        onChange: function(v) { sliderObj.val = v; updatePanel(); },
+        onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); }
       });
       sliderObj.el = slider;
       _sliders.push(sliderObj);

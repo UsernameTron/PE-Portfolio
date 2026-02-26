@@ -113,7 +113,7 @@
 
       var total = 0;
       Data.roadmapPhases.forEach(function(phase) {
-        total += parseInt(phase.investment.replace(/[$,]/g, ''));
+        total += parseInt(phase.investment.replace(/[$,]/g, ''), 10);
         var row = document.createElement('div');
         row.className = 'br-invest-row';
         row.innerHTML = '<span class="body-sm">' + phase.name + '</span><span class="mono-md">' + phase.investment + '</span>';
@@ -191,7 +191,7 @@
       if (i < data.length - 1) {
         item.innerHTML += '<div class="br-timeline-line"></div>';
       }
-      item.addEventListener('click', function() {
+      _on(item, 'click', function() {
         _activePhase = i;
         nav.querySelectorAll('.br-timeline-item').forEach(function(el, j) {
           el.classList.toggle('active', j === i);
@@ -241,7 +241,8 @@
       onSelect: function(label) {
         _viewMode = label === 'FUND ROADMAP' ? 'roadmap' : 'sectors';
         renderView();
-      }
+      },
+      onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); }
     });
     container.appendChild(viewToggle);
 
