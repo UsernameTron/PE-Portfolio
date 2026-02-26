@@ -1,5 +1,6 @@
 [build]
-  publish = "."
+  base = "acp-intel-platform"
+  publish = "acp-intel-platform"
   # No build command — raw files deployed directly
 
 [[redirects]]
