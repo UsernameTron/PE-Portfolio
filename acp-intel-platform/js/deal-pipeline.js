@@ -4,14 +4,23 @@
 
   var _container = null;
   var _panel = null;
-  var _timers = [];
-  var _listeners = [];
+  var _activeTier = 'ALL';
+  var _searchTerm = '';
+  var base = ModuleBase();
+  var E = Components.esc;
 
-  function _interval(fn, ms) { var id = setInterval(fn, ms); _timers.push(id); return id; }
-  function _timeout(fn, ms) { var id = setTimeout(fn, ms); _timers.push(id); return id; }
-  function _on(target, event, handler) {
-    target.addEventListener(event, handler);
-    _listeners.push({ target: target, event: event, handler: handler });
+  function applyFilters() {
+    var filtered = _activeTier === 'ALL' ? Data.prospects.slice() : Data.prospects.filter(function(p) { return p.tier === _activeTier; });
+    if (_searchTerm) {
+      var term = _searchTerm.toLowerCase();
+      filtered = filtered.filter(function(p) {
+        return (p.company && p.company.toLowerCase().indexOf(term) !== -1) ||
+               (p.sector && p.sector.toLowerCase().indexOf(term) !== -1) ||
+               (p.location && p.location.toLowerCase().indexOf(term) !== -1) ||
+               (p.processStage && p.processStage.toLowerCase().indexOf(term) !== -1);
+      });
+    }
+    renderCards(filtered);
   }
 
   function tierColor(tier) {
@@ -49,13 +58,13 @@
     var stats = document.createElement('div');
     stats.className = 'pi-card-stats body-sm';
     stats.innerHTML =
-      '<div>Revenue: <span class="mono-md">' + prospect.revenue + '</span></div>' +
-      '<div>Sector: ' + prospect.sector + '</div>' +
-      '<div>EBITDA: <span class="mono-md" style="color:var(--emerald)">' + prospect.ebitda + '</span></div>' +
-      '<div>Stage: <span style="color:var(--red)">' + prospect.processStage + '</span></div>';
+      '<div>Revenue: <span class="mono-md">' + E(prospect.revenue) + '</span></div>' +
+      '<div>Sector: ' + E(prospect.sector) + '</div>' +
+      '<div>EBITDA: <span class="mono-md" style="color:var(--emerald)">' + E(prospect.ebitda) + '</span></div>' +
+      '<div>Stage: <span style="color:var(--red)">' + E(prospect.processStage) + '</span></div>';
     card.appendChild(stats);
 
-    _on(card, 'click', function() { openDetail(prospect); });
+    base._on(card, 'click', function() { openDetail(prospect); });
     return card;
   }
 
@@ -67,7 +76,7 @@
     var closeBtn = document.createElement('button');
     closeBtn.className = 'pi-close-btn';
     closeBtn.innerHTML = '&times;';
-    _on(closeBtn, 'click', function() {
+    base._on(closeBtn, 'click', function() {
       _panel.classList.remove('pi-panel-open');
       _panel.innerHTML = '';
     });
@@ -128,9 +137,9 @@
       var row = document.createElement('div');
       row.className = 'pi-factor-row';
       row.innerHTML =
-        '<span class="body-sm pi-factor-name">' + name + '</span>' +
+        '<span class="body-sm pi-factor-name">' + E(name) + '</span>' +
         '<div class="pi-factor-bar-track"><div class="pi-factor-bar-fill" style="width:' + val + '%;background:' + barColor + '"></div></div>' +
-        '<span class="mono-md pi-factor-val">' + val + '</span>';
+        '<span class="mono-md pi-factor-val">' + E(val) + '</span>';
       _panel.appendChild(row);
     });
 
@@ -217,6 +226,10 @@
     if (!grid) return;
     grid.innerHTML = '';
     prospects.sort(function(a, b) { return b.score - a.score; });
+    if (prospects.length === 0) {
+      grid.appendChild(Components.EmptyState({ title: 'No deals found', message: 'Try adjusting your search or filter criteria.' }));
+      return;
+    }
     prospects.forEach(function(p) { grid.appendChild(buildCard(p)); });
   }
 
@@ -225,6 +238,13 @@
     _panel = panel;
 
     var counts = Data.getTierCounts();
+
+    // Search input
+    container.appendChild(Components.SearchInput({
+      placeholder: 'Search deals by company, sector, location, stage...',
+      onSearch: function(term) { _searchTerm = term; applyFilters(); },
+      onAddListener: base.onAddListener
+    }));
 
     // Filter tabs
     var filterBar = Components.FilterTabBar({
@@ -235,11 +255,8 @@
         { label: 'NURTURE', count: counts.NURTURE, color: 'teal' },
         { label: 'STRATEGIC', count: counts.STRATEGIC, color: 'text-faint' }
       ],
-      onSelect: function(tier) {
-        var filtered = tier === 'ALL' ? Data.prospects.slice() : Data.prospects.filter(function(p) { return p.tier === tier; });
-        renderCards(filtered);
-      },
-      onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); }
+      onSelect: function(tier) { _activeTier = tier; applyFilters(); },
+      onAddListener: base.onAddListener
     });
     container.appendChild(filterBar);
 
@@ -252,10 +269,7 @@
   }
 
   function destroy() {
-    _timers.forEach(function(id) { clearInterval(id); clearTimeout(id); });
-    _timers = [];
-    _listeners.forEach(function(l) { l.target.removeEventListener(l.event, l.handler); });
-    _listeners = [];
+    base._destroy();
     _container = null;
     _panel = null;
   }

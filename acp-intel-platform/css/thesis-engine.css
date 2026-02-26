@@ -22,3 +22,15 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--space-3);
 }
+
+/* ── Pipeline Match Rows ── */
+.te-match-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+.te-match-row:hover { background: var(--surface-alt); }
+.te-match-info { display: flex; align-items: center; gap: var(--space-2); }

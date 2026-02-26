@@ -92,8 +92,9 @@
         activeModule = id;
         activeInstance = mod;
         mod.init(contentMain, contentPanel);
+        contentMain.focus();
       } else {
-        contentMain.innerHTML = '<div style="padding:40px;color:var(--text-muted);">Module "' + id + '" not found.</div>';
+        contentMain.innerHTML = '<div style="padding:40px;color:var(--text-muted);">Module "' + Components.esc(id) + '" not found.</div>';
       }
     });
   }

@@ -194,25 +194,46 @@
   C.FilterTabBar = function(opts) {
     var el = document.createElement('div');
     el.className = 'filter-tab-bar';
+    el.setAttribute('role', 'tablist');
 
     opts.tabs.forEach(function(tab, i) {
       var btn = document.createElement('button');
       btn.className = 'filter-tab' + (i === 0 ? ' active' : '');
       btn.dataset.value = tab.label;
       btn.innerHTML = tab.label + ' <span class="filter-tab-count">' + tab.count + '</span>';
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      btn.tabIndex = i === 0 ? 0 : -1;
       if (tab.color && i === 0) btn.style.background = 'var(--' + tab.color + ')';
 
       trackListener(opts, btn, 'click', function() {
         el.querySelectorAll('.filter-tab').forEach(function(t) {
           t.classList.remove('active');
           t.style.background = '';
+          t.setAttribute('aria-selected', 'false');
+          t.tabIndex = -1;
         });
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        btn.tabIndex = 0;
         if (tab.color) btn.style.background = 'var(--' + tab.color + ')';
         if (opts.onSelect) opts.onSelect(tab.label);
       });
 
       el.appendChild(btn);
+    });
+
+    // Arrow key navigation between tabs
+    trackListener(opts, el, 'keydown', function(e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      var tabs = el.querySelectorAll('.filter-tab');
+      var current = el.querySelector('.filter-tab:focus');
+      if (!current) return;
+      var idx = Array.prototype.indexOf.call(tabs, current);
+      if (e.key === 'ArrowRight') idx = (idx + 1) % tabs.length;
+      else idx = (idx - 1 + tabs.length) % tabs.length;
+      tabs[idx].focus();
+      tabs[idx].click();
     });
 
     return el;
@@ -278,7 +299,11 @@
         });
         if (opts.onRowClick) {
           tr.style.cursor = 'pointer';
+          tr.tabIndex = 0;
           trackListener(opts, tr, 'click', function() { opts.onRowClick(row); });
+          trackListener(opts, tr, 'keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); opts.onRowClick(row); }
+          });
         }
         tbody.appendChild(tr);
       });
@@ -320,10 +345,27 @@
     header.className = 'signal-detail-header';
     header.appendChild(C.SignalBadge(s.label, s.color));
 
+    // Freshness indicator
+    var freshnessWrap = document.createElement('span');
+    freshnessWrap.className = 'signal-freshness';
+    if (s.lastVerified) {
+      var daysAgo = Math.round((Date.now() - new Date(s.lastVerified).getTime()) / 86400000);
+      var freshColor = daysAgo <= 3 ? 'emerald' : daysAgo <= 7 ? 'amber' : 'red';
+      var dot = document.createElement('span');
+      dot.className = 'freshness-dot';
+      dot.style.background = 'var(--' + freshColor + ')';
+      freshnessWrap.appendChild(dot);
+      var age = document.createElement('span');
+      age.className = 'mono-sm';
+      age.style.color = 'var(--' + freshColor + ')';
+      age.textContent = daysAgo + 'd ago';
+      freshnessWrap.appendChild(age);
+    }
     var conf = document.createElement('span');
     conf.className = 'signal-confidence mono-sm';
     conf.textContent = Math.round(s.confidence * 100) + '% confidence';
     conf.style.color = 'var(--text-muted)';
+    header.appendChild(freshnessWrap);
     header.appendChild(conf);
     el.appendChild(header);
 
@@ -353,5 +395,37 @@
     return el;
   };
 
+  // ── 4.1.13 Search Input ──
+  C.SearchInput = function(opts) {
+    var el = document.createElement('div');
+    el.className = 'search-input-wrap';
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'search-input';
+    input.placeholder = opts.placeholder || 'Search...';
+    input.setAttribute('aria-label', opts.placeholder || 'Search');
+    var timer = null;
+    trackListener(opts, input, 'input', function() {
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        if (opts.onSearch) opts.onSearch(input.value.trim());
+      }, 200);
+    });
+    el.appendChild(input);
+    return el;
+  };
+
+  // ── 4.1.14 Empty State ──
+  C.EmptyState = function(opts) {
+    var el = document.createElement('div');
+    el.className = 'empty-state';
+    el.innerHTML =
+      '<div class="empty-state-icon">' + (opts.icon || '&#9675;') + '</div>' +
+      '<div class="empty-state-title heading-md">' + esc(opts.title || 'No results') + '</div>' +
+      '<div class="empty-state-msg body-sm">' + esc(opts.message || 'Try adjusting your search or filters.') + '</div>';
+    return el;
+  };
+
+  C.esc = esc;
   window.Components = C;
 })();

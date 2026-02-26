@@ -4,16 +4,9 @@
 
   var _container = null;
   var _panel = null;
-  var _timers = [];
-  var _listeners = [];
-  var _vals = { ebitda: 8, multiple: 7, holdPeriod: 5, growth: 15 };
-
-  function _interval(fn, ms) { var id = setInterval(fn, ms); _timers.push(id); return id; }
-  function _timeout(fn, ms) { var id = setTimeout(fn, ms); _timers.push(id); return id; }
-  function _on(target, event, handler) {
-    target.addEventListener(event, handler);
-    _listeners.push({ target: target, event: event, handler: handler });
-  }
+  var _vals = { ebitda: 8, multiple: 7, holdPeriod: 5, growth: 15, equityPct: 40, exitExpansion: 1.5 };
+  var base = ModuleBase();
+  var E = Components.esc;
 
   function fmt(val) { return '$' + val.toFixed(1) + 'M'; }
   function fmtMOIC(val) { return val.toFixed(1) + 'x'; }
@@ -24,13 +17,12 @@
 
     // Core PE value creation math
     var entryEV = _vals.ebitda * _vals.multiple;
-    var EXIT_MULTIPLE_EXPANSION = 1.5;
-    var exitMultiple = _vals.multiple + EXIT_MULTIPLE_EXPANSION;
+    var exitMultiple = _vals.multiple + _vals.exitExpansion;
     var exitEBITDA = _vals.ebitda * Math.pow(1 + _vals.growth / 100, _vals.holdPeriod);
     var exitEV = exitEBITDA * exitMultiple;
     var moic = exitEV / entryEV;
     var irr = (Math.pow(moic, 1 / _vals.holdPeriod) - 1) * 100;
-    var equityPct = 0.40;
+    var equityPct = _vals.equityPct / 100;
     var equityCheck = entryEV * equityPct;
     var equityMOIC = exitEV / equityCheck;
 
@@ -44,18 +36,19 @@
     var econ = _container.querySelector('.rm-econ-table');
     if (econ) {
       econ.innerHTML =
-        '<div class="rm-econ-row"><span class="body-sm">Entry EV</span><span class="mono-md" style="color:var(--text)">' + fmt(entryEV) + '</span></div>' +
-        '<div class="rm-econ-row"><span class="body-sm">Equity Check</span><span class="mono-md" style="color:var(--emerald)">' + fmt(equityCheck) + '</span></div>' +
-        '<div class="rm-econ-row"><span class="body-sm">Exit EBITDA</span><span class="mono-md" style="color:var(--text)">' + fmt(exitEBITDA) + '</span></div>' +
-        '<div class="rm-econ-row"><span class="body-sm">Exit EV</span><span class="mono-md" style="color:var(--emerald)">' + fmt(exitEV) + '</span></div>';
+        '<div class="rm-econ-row"><span class="body-sm">Entry EV</span><span class="mono-md" style="color:var(--text)">' + E(fmt(entryEV)) + '</span></div>' +
+        '<div class="rm-econ-row"><span class="body-sm">Equity Check</span><span class="mono-md" style="color:var(--emerald)">' + E(fmt(equityCheck)) + '</span></div>' +
+        '<div class="rm-econ-row"><span class="body-sm">Exit EBITDA</span><span class="mono-md" style="color:var(--text)">' + E(fmt(exitEBITDA)) + '</span></div>' +
+        '<div class="rm-econ-row"><span class="body-sm">Exit EV</span><span class="mono-md" style="color:var(--emerald)">' + E(fmt(exitEV)) + '</span></div>';
     }
 
     // Update split bar
+    var debtPct = 100 - _vals.equityPct;
     var splitBar = _container.querySelector('.rm-split-bar');
     if (splitBar) {
       splitBar.innerHTML =
-        '<div class="rm-split-guru" style="width:60%"><span class="mono-sm">DEBT 60%</span></div>' +
-        '<div class="rm-split-ctg" style="width:40%"><span class="mono-sm">EQUITY 40%</span></div>';
+        '<div class="rm-split-guru" style="width:' + debtPct + '%"><span class="mono-sm">DEBT ' + debtPct + '%</span></div>' +
+        '<div class="rm-split-ctg" style="width:' + _vals.equityPct + '%"><span class="mono-sm">EQUITY ' + _vals.equityPct + '%</span></div>';
     }
 
     // Update panel
@@ -98,8 +91,8 @@
       row.className = 'rm-year-row';
       var colorStyle = item[3] ? 'color:var(--' + item[3] + ')' : 'color:var(--text)';
       row.innerHTML =
-        '<span class="body-sm">' + item[0] + '</span>' +
-        '<span class="mono-lg" style="' + colorStyle + '">' + fmtMOIC(item[1]) + ' &middot; ' + fmtIRR(item[2]) + ' IRR</span>';
+        '<span class="body-sm">' + E(item[0]) + '</span>' +
+        '<span class="mono-lg" style="' + colorStyle + '">' + E(fmtMOIC(item[1])) + ' &middot; ' + E(fmtIRR(item[2])) + ' IRR</span>';
       _panel.appendChild(row);
     });
 
@@ -121,7 +114,7 @@
   function init(container, panel) {
     _container = container;
     _panel = panel;
-    _vals = { ebitda: 8, multiple: 7, holdPeriod: 5, growth: 15 };
+    _vals = { ebitda: 8, multiple: 7, holdPeriod: 5, growth: 15, equityPct: 40, exitExpansion: 1.5 };
 
     // Title
     var title = document.createElement('div');
@@ -136,26 +129,35 @@
     container.appendChild(sub);
 
     // 4 Sliders
-    var _addListener = function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); };
     container.appendChild(Components.RangeSlider({
       label: 'Entry EBITDA ($M)', min: 3, max: 15, value: 8, step: 0.5, prefix: '$', suffix: 'M',
       onChange: function(v) { _vals.ebitda = v; updateAll(); },
-      onAddListener: _addListener
+      onAddListener: base.onAddListener
     }));
     container.appendChild(Components.RangeSlider({
       label: 'Entry EV/EBITDA Multiple', min: 5, max: 12, value: 7, step: 0.5, suffix: 'x',
       onChange: function(v) { _vals.multiple = v; updateAll(); },
-      onAddListener: _addListener
+      onAddListener: base.onAddListener
     }));
     container.appendChild(Components.RangeSlider({
       label: 'Hold Period (years)', min: 3, max: 7, value: 5, step: 1,
       onChange: function(v) { _vals.holdPeriod = v; updateAll(); },
-      onAddListener: _addListener
+      onAddListener: base.onAddListener
     }));
     container.appendChild(Components.RangeSlider({
       label: 'Annual EBITDA Growth (%)', min: 5, max: 30, value: 15, step: 1, suffix: '%',
       onChange: function(v) { _vals.growth = v; updateAll(); },
-      onAddListener: _addListener
+      onAddListener: base.onAddListener
+    }));
+    container.appendChild(Components.RangeSlider({
+      label: 'Equity %', min: 30, max: 70, value: 40, step: 5, suffix: '%',
+      onChange: function(v) { _vals.equityPct = v; updateAll(); },
+      onAddListener: base.onAddListener
+    }));
+    container.appendChild(Components.RangeSlider({
+      label: 'Exit Multiple Expansion', min: 0, max: 3, value: 1.5, step: 0.5, suffix: 'x',
+      onChange: function(v) { _vals.exitExpansion = v; updateAll(); },
+      onAddListener: base.onAddListener
     }));
 
     // Economics section
@@ -184,10 +186,7 @@
   }
 
   function destroy() {
-    _timers.forEach(function(id) { clearInterval(id); clearTimeout(id); });
-    _timers = [];
-    _listeners.forEach(function(l) { l.target.removeEventListener(l.event, l.handler); });
-    _listeners = [];
+    base._destroy();
     _container = null;
     _panel = null;
   }

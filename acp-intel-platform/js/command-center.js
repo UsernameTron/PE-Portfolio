@@ -4,15 +4,25 @@
 
   var _container = null;
   var _panel = null;
-  var _timers = [];
-  var _listeners = [];
   var _tableEl = null;
+  var _activeTier = 'ALL';
+  var _searchTerm = '';
+  var base = ModuleBase();
+  var E = Components.esc;
 
-  function _interval(fn, ms) { var id = setInterval(fn, ms); _timers.push(id); return id; }
-  function _timeout(fn, ms) { var id = setTimeout(fn, ms); _timers.push(id); return id; }
-  function _on(target, event, handler) {
-    target.addEventListener(event, handler);
-    _listeners.push({ target: target, event: event, handler: handler });
+  function applyFilters() {
+    var filtered = _activeTier === 'ALL' ? Data.prospects.slice() : Data.prospects.filter(function(p) { return p.tier === _activeTier; });
+    if (_searchTerm) {
+      var term = _searchTerm.toLowerCase();
+      filtered = filtered.filter(function(p) {
+        return (p.company && p.company.toLowerCase().indexOf(term) !== -1) ||
+               (p.sector && p.sector.toLowerCase().indexOf(term) !== -1) ||
+               (p.location && p.location.toLowerCase().indexOf(term) !== -1) ||
+               (p.processStage && p.processStage.toLowerCase().indexOf(term) !== -1);
+      });
+    }
+    filtered.sort(function(a, b) { return b.score - a.score; });
+    if (_tableEl) _tableEl.updateRows(filtered);
   }
 
   function init(container, panel) {
@@ -53,6 +63,13 @@
     pipeLabel.textContent = 'PIPELINE OVERVIEW';
     container.appendChild(pipeLabel);
 
+    // Search input
+    container.appendChild(Components.SearchInput({
+      placeholder: 'Search prospects by company, sector, location, stage...',
+      onSearch: function(term) { _searchTerm = term; applyFilters(); },
+      onAddListener: base.onAddListener
+    }));
+
     // Filter tabs
     var filterBar = Components.FilterTabBar({
       tabs: [
@@ -62,12 +79,8 @@
         { label: 'NURTURE', count: counts.NURTURE, color: 'teal' },
         { label: 'STRATEGIC', count: counts.STRATEGIC, color: 'text-faint' }
       ],
-      onSelect: function(tier) {
-        var filtered = tier === 'ALL' ? Data.prospects : Data.prospects.filter(function(p) { return p.tier === tier; });
-        filtered.sort(function(a, b) { return b.score - a.score; });
-        if (_tableEl) _tableEl.updateRows(filtered);
-      },
-      onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); }
+      onSelect: function(tier) { _activeTier = tier; applyFilters(); },
+      onAddListener: base.onAddListener
     });
     container.appendChild(filterBar);
 
@@ -77,11 +90,11 @@
       columns: [
         { key: 'score', label: 'Conviction', width: '70px', align: 'center', format: function(v, row) {
           var color = row.tier === 'HOT' ? 'var(--red)' : row.tier === 'WARM' ? 'var(--amber)' : row.tier === 'NURTURE' ? 'var(--teal)' : 'var(--text-muted)';
-          return '<span class="mono-md" style="color:' + color + '">' + v + '</span>';
+          return '<span class="mono-md" style="color:' + color + '">' + E(v) + '</span>';
         }},
         { key: 'company', label: 'Company' },
         { key: 'sector', label: 'Sector' },
-        { key: 'ebitda', label: 'EBITDA', align: 'right', format: function(v) { return '<span class="mono-md">' + v + '</span>'; }},
+        { key: 'ebitda', label: 'EBITDA', align: 'right', format: function(v) { return '<span class="mono-md">' + E(v) + '</span>'; }},
         { key: 'evEstimate', label: 'EV' },
         { key: 'signals', label: 'Signal', format: function(v, row) {
           if (!v || !v.length) return '';
@@ -91,7 +104,7 @@
         { key: 'tier', label: 'Tier', format: function(v) { return Components.TierBadge(v).outerHTML; }}
       ],
       rows: sorted,
-      onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); }
+      onAddListener: base.onAddListener
     });
     container.appendChild(_tableEl);
 
@@ -110,12 +123,40 @@
       row.className = 'cc-tech-row';
       var pct = (entry[1] / maxCount) * 100;
       row.innerHTML =
-        '<span class="cc-tech-name body-sm">' + entry[0] + '</span>' +
+        '<span class="cc-tech-name body-sm">' + E(entry[0]) + '</span>' +
         '<div class="cc-tech-bar-track"><div class="cc-tech-bar-fill" style="width:' + pct + '%"></div></div>' +
-        '<span class="cc-tech-count mono-sm">' + entry[1] + '</span>';
+        '<span class="cc-tech-count mono-sm">' + E(entry[1]) + '</span>';
       techChart.appendChild(row);
     });
     panel.appendChild(techChart);
+
+    // ── Panel: Process Stages ──
+    var stageLabel = document.createElement('div');
+    stageLabel.className = 'label-lg cc-section-label';
+    stageLabel.textContent = 'PROCESS STAGES';
+    panel.appendChild(stageLabel);
+
+    var stageCounts = {};
+    Data.prospects.forEach(function(p) {
+      if (p.processStage) stageCounts[p.processStage] = (stageCounts[p.processStage] || 0) + 1;
+    });
+    var stageEntries = Object.keys(stageCounts).map(function(k) { return [k, stageCounts[k]]; });
+    stageEntries.sort(function(a, b) { return b[1] - a[1]; });
+    var stageMax = stageEntries[0] ? stageEntries[0][1] : 1;
+
+    var stageChart = document.createElement('div');
+    stageChart.className = 'cc-tech-chart';
+    stageEntries.forEach(function(entry) {
+      var row = document.createElement('div');
+      row.className = 'cc-tech-row';
+      var pct = (entry[1] / stageMax) * 100;
+      row.innerHTML =
+        '<span class="cc-tech-name body-sm">' + E(entry[0]) + '</span>' +
+        '<div class="cc-tech-bar-track"><div class="cc-tech-bar-fill" style="width:' + pct + '%;background:var(--violet)"></div></div>' +
+        '<span class="cc-tech-count mono-sm">' + E(entry[1]) + '</span>';
+      stageChart.appendChild(row);
+    });
+    panel.appendChild(stageChart);
 
     // ── Panel: Intelligence Feed ──
     var feedHeader = document.createElement('div');
@@ -137,10 +178,7 @@
   }
 
   function destroy() {
-    _timers.forEach(function(id) { clearInterval(id); clearTimeout(id); });
-    _timers = [];
-    _listeners.forEach(function(l) { l.target.removeEventListener(l.event, l.handler); });
-    _listeners = [];
+    base._destroy();
     _tableEl = null;
     _container = null;
     _panel = null;

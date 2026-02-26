@@ -9,7 +9,10 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
 }
+.cm-comp-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 .cm-comp-header {
   display: flex;
   align-items: center;

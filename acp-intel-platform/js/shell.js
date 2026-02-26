@@ -18,9 +18,10 @@
     var hot = document.getElementById('sb-hot');
     var warm = document.getElementById('sb-warm');
     var pipeline = document.getElementById('sb-pipeline');
-    if (hot) hot.innerHTML = '● HOT <strong>' + (counts.HOT || 0) + '</strong>';
-    if (warm) warm.innerHTML = '● WARM <strong>' + (counts.WARM || 0) + '</strong>';
-    if (pipeline) pipeline.innerHTML = '● PIPELINE <strong>' + Data.getAggregateEV() + '</strong>';
+    var E = Components.esc;
+    if (hot) hot.innerHTML = '● HOT <strong>' + E(counts.HOT || 0) + '</strong>';
+    if (warm) warm.innerHTML = '● WARM <strong>' + E(counts.WARM || 0) + '</strong>';
+    if (pipeline) pipeline.innerHTML = '● PIPELINE <strong>' + E(Data.getAggregateEV()) + '</strong>';
   }
 
   document.addEventListener('DOMContentLoaded', populateStatusBar);

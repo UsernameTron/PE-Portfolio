@@ -11,9 +11,11 @@
   border-top: 3px solid var(--text-faint);
   padding: var(--space-4);
   cursor: pointer;
-  transition: border-color var(--duration-fast) var(--ease-out);
+  transition: border-color var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
 }
-.pi-card:hover { border-color: var(--border-active); }
+.pi-card:hover { border-color: var(--border-active); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 .pi-card-name { margin: var(--space-2) 0 var(--space-1); }
 .pi-card-location { color: var(--text-secondary); margin-bottom: var(--space-2); }
 .pi-card-badges { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-bottom: var(--space-3); }

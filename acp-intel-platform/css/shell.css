@@ -59,6 +59,10 @@
   background: var(--emerald-muted);
   border-left-color: var(--emerald);
 }
+.nav-tab:focus-visible {
+  outline: 2px solid var(--emerald);
+  outline-offset: -2px;
+}
 .nav-icon {
   font-size: 10px;
   width: 16px;
@@ -151,3 +155,17 @@
   border-left: 1px solid var(--border);
   background: var(--surface);
 }
+
+/* ═══ MODULE ENTER ANIMATION ═══ */
+@keyframes moduleEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.content-main > * { animation: moduleEnter var(--duration-base) var(--ease-out); }
+
+/* ═══ PANEL SLIDE-IN ═══ */
+@keyframes panelSlideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.content-panel > * { animation: panelSlideIn var(--duration-base) var(--ease-out); }

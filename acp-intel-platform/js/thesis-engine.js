@@ -4,17 +4,10 @@
 
   var _container = null;
   var _panel = null;
-  var _timers = [];
-  var _listeners = [];
   var _sliders = [];
   var _weights = [0.20, 0.20, 0.15, 0.20, 0.15, 0.10];
-
-  function _interval(fn, ms) { var id = setInterval(fn, ms); _timers.push(id); return id; }
-  function _timeout(fn, ms) { var id = setTimeout(fn, ms); _timers.push(id); return id; }
-  function _on(target, event, handler) {
-    target.addEventListener(event, handler);
-    _listeners.push({ target: target, event: event, handler: handler });
-  }
+  var base = ModuleBase();
+  var E = Components.esc;
 
   var PRESETS = {
     'Platform Consolidation': [90, 75, 85, 80, 65, 85],
@@ -53,7 +46,7 @@
     var badge = document.createElement('div');
     badge.style.textAlign = 'center';
     badge.style.marginBottom = 'var(--space-4)';
-    badge.innerHTML = '<span class="tier-badge tier-badge--' + (convColor === 'text-muted' ? 'strategic' : conviction.toLowerCase().replace(/\s/g, '-')) + '" style="background:var(--' + convColor + ');font-size:12px;padding:4px 12px">' + conviction + '</span>';
+    badge.innerHTML = '<span class="tier-badge tier-badge--' + (convColor === 'text-muted' ? 'strategic' : conviction.toLowerCase().replace(/\s/g, '-')) + '" style="background:var(--' + convColor + ');font-size:12px;padding:4px 12px">' + E(conviction) + '</span>';
     _panel.appendChild(badge);
 
     // KPIs
@@ -76,6 +69,38 @@
       labels: ['Sector Fit', 'Mgmt Quality', 'Growth Runway', 'EBITDA Quality', 'Deal Complexity', 'Competitive Proc.']
     }));
     _panel.appendChild(radarWrap);
+
+    // Top pipeline matches — score prospects against current thesis weights
+    var matchLabel = document.createElement('div');
+    matchLabel.className = 'label-lg';
+    matchLabel.textContent = 'TOP PIPELINE MATCHES';
+    matchLabel.style.margin = 'var(--space-4) 0 var(--space-2)';
+    _panel.appendChild(matchLabel);
+
+    var thesisValues = _sliders.map(function(s) { return s.val; });
+    var scored = Data.prospects.map(function(p) {
+      var cf = p.convictionFactors;
+      var factors = [cf.sectorFit, cf.mgmtQuality, cf.growthRunway, cf.ebitdaQuality, cf.dealComplexity, cf.competitiveProc];
+      var matchScore = 0;
+      factors.forEach(function(f, i) {
+        matchScore += (1 - Math.abs(f - thesisValues[i]) / 100) * _weights[i] * 100;
+      });
+      return { prospect: p, matchScore: Math.round(matchScore) };
+    });
+    scored.sort(function(a, b) { return b.matchScore - a.matchScore; });
+    scored.slice(0, 5).forEach(function(item) {
+      var row = document.createElement('div');
+      row.className = 'te-match-row';
+      row.innerHTML =
+        '<div class="te-match-info">' +
+          '<span class="heading-sm">' + E(item.prospect.company) + '</span>' +
+          ' ' + Components.TierBadge(item.prospect.tier).outerHTML +
+        '</div>' +
+        '<span class="mono-md" style="color:var(--emerald)">' + E(item.matchScore) + '%</span>';
+      base._on(row, 'click', function() { window.location.hash = '#deal-pipeline'; });
+      row.style.cursor = 'pointer';
+      _panel.appendChild(row);
+    });
 
     // IC-style recommendation callout
     var recText = score >= 75 ? 'STRONG BUY \u2014 Recommend immediate IC presentation. Target exhibits exceptional conviction across all dimensions. Thesis alignment, management quality, and sector positioning support aggressive pursuit.' :
@@ -109,7 +134,7 @@
       var btn = document.createElement('button');
       btn.className = 'ss-preset-btn';
       btn.textContent = name;
-      _on(btn, 'click', function() {
+      base._on(btn, 'click', function() {
         presetRow.querySelectorAll('.ss-preset-btn').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         var vals = PRESETS[name];
@@ -130,7 +155,7 @@
         label: label,
         min: 0, max: 100, value: defaults[i],
         onChange: function(v) { sliderObj.val = v; updatePanel(); },
-        onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); }
+        onAddListener: base.onAddListener
       });
       sliderObj.el = slider;
       _sliders.push(sliderObj);
@@ -141,10 +166,7 @@
   }
 
   function destroy() {
-    _timers.forEach(function(id) { clearInterval(id); clearTimeout(id); });
-    _timers = [];
-    _listeners.forEach(function(l) { l.target.removeEventListener(l.event, l.handler); });
-    _listeners = [];
+    base._destroy();
     _sliders = [];
     _container = null;
     _panel = null;

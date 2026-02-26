@@ -4,22 +4,15 @@
 
   var _container = null;
   var _panel = null;
-  var _timers = [];
-  var _listeners = [];
   var _activePhase = 0;
   var _viewMode = 'roadmap';
-
-  function _interval(fn, ms) { var id = setInterval(fn, ms); _timers.push(id); return id; }
-  function _timeout(fn, ms) { var id = setTimeout(fn, ms); _timers.push(id); return id; }
-  function _on(target, event, handler) {
-    target.addEventListener(event, handler);
-    _listeners.push({ target: target, event: event, handler: handler });
-  }
+  var base = ModuleBase();
+  var E = Components.esc;
 
   function statusBadgeHTML(status, color) {
     var bg = color === 'emerald' ? 'var(--emerald)' : color === 'amber' ? 'var(--amber)' : 'var(--text-faint)';
     var textColor = color === 'amber' ? 'var(--text-on-accent)' : 'var(--text)';
-    return '<span style="display:inline-block;font:700 10px/1 var(--font-mono);padding:3px 8px;border-radius:var(--radius-sm);background:' + bg + ';color:' + textColor + '">' + status + '</span>';
+    return '<span style="display:inline-block;font:700 10px/1 var(--font-mono);padding:3px 8px;border-radius:var(--radius-sm);background:' + bg + ';color:' + textColor + '">' + E(status) + '</span>';
   }
 
   function getDataSource() {
@@ -68,7 +61,7 @@
     phase.tasks.forEach(function(task) {
       var taskEl = document.createElement('div');
       taskEl.className = 'br-task';
-      taskEl.innerHTML = '<span class="body-sm">' + task.name + '</span><span class="mono-sm" style="color:var(--emerald)">' + task.hours + '</span>';
+      taskEl.innerHTML = '<span class="body-sm">' + E(task.name) + '</span><span class="mono-sm" style="color:var(--emerald)">' + E(task.hours) + '</span>';
       taskGrid.appendChild(taskEl);
     });
     detail.appendChild(taskGrid);
@@ -83,7 +76,7 @@
     var metricsRow = document.createElement('div');
     metricsRow.className = 'br-metrics-row';
     phase.metrics.forEach(function(m) {
-      metricsRow.innerHTML += '<div class="br-metric"><span class="label-sm">' + m.label.toUpperCase() + '</span><span class="mono-md" style="color:var(--emerald)">' + m.value + '</span></div>';
+      metricsRow.innerHTML += '<div class="br-metric"><span class="label-sm">' + E(m.label.toUpperCase()) + '</span><span class="mono-md" style="color:var(--emerald)">' + E(m.value) + '</span></div>';
     });
     detail.appendChild(metricsRow);
 
@@ -116,13 +109,13 @@
         total += parseInt(phase.investment.replace(/[$,]/g, ''), 10);
         var row = document.createElement('div');
         row.className = 'br-invest-row';
-        row.innerHTML = '<span class="body-sm">' + phase.name + '</span><span class="mono-md">' + phase.investment + '</span>';
+        row.innerHTML = '<span class="body-sm">' + E(phase.name) + '</span><span class="mono-md">' + E(phase.investment) + '</span>';
         _panel.appendChild(row);
       });
 
       var totalRow = document.createElement('div');
       totalRow.className = 'br-invest-row br-invest-total';
-      totalRow.innerHTML = '<span class="heading-sm">TOTAL</span><span class="mono-lg" style="color:var(--emerald)">$' + total.toLocaleString() + '</span>';
+      totalRow.innerHTML = '<span class="heading-sm">TOTAL</span><span class="mono-lg" style="color:var(--emerald)">$' + E(total.toLocaleString()) + '</span>';
       _panel.appendChild(totalRow);
 
       _panel.appendChild(Components.CalloutBox({
@@ -152,7 +145,7 @@
       stats.forEach(function(stat) {
         var row = document.createElement('div');
         row.className = 'br-invest-row';
-        row.innerHTML = '<span class="body-sm">' + stat.label + '</span><span class="mono-md" style="color:var(--emerald)">' + stat.value + '</span>';
+        row.innerHTML = '<span class="body-sm">' + E(stat.label) + '</span><span class="mono-md" style="color:var(--emerald)">' + E(stat.value) + '</span>';
         _panel.appendChild(row);
       });
 
@@ -185,13 +178,13 @@
       item.innerHTML =
         '<div class="br-timeline-dot" style="background:var(--' + phase.statusColor + ')"></div>' +
         '<div class="br-timeline-text">' +
-          '<span class="heading-sm">' + phase.name + '</span>' +
-          '<span class="body-sm" style="color:var(--text-muted)">' + phase.weeks + '</span>' +
+          '<span class="heading-sm">' + E(phase.name) + '</span>' +
+          '<span class="body-sm" style="color:var(--text-muted)">' + E(phase.weeks) + '</span>' +
         '</div>';
       if (i < data.length - 1) {
         item.innerHTML += '<div class="br-timeline-line"></div>';
       }
-      _on(item, 'click', function() {
+      base._on(item, 'click', function() {
         _activePhase = i;
         nav.querySelectorAll('.br-timeline-item').forEach(function(el, j) {
           el.classList.toggle('active', j === i);
@@ -242,7 +235,7 @@
         _viewMode = label === 'FUND ROADMAP' ? 'roadmap' : 'sectors';
         renderView();
       },
-      onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); }
+      onAddListener: base.onAddListener
     });
     container.appendChild(viewToggle);
 
@@ -251,10 +244,7 @@
   }
 
   function destroy() {
-    _timers.forEach(function(id) { clearInterval(id); clearTimeout(id); });
-    _timers = [];
-    _listeners.forEach(function(l) { l.target.removeEventListener(l.event, l.handler); });
-    _listeners = [];
+    base._destroy();
     _container = null;
     _panel = null;
   }

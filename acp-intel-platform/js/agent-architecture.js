@@ -4,20 +4,13 @@
 
   var _container = null;
   var _panel = null;
-  var _timers = [];
-  var _listeners = [];
   var _destroyed = false;
   var _simRunning = false;
   var _simPaused = false;
   var _simIndex = 0;
   var _allSteps = [];
-
-  function _interval(fn, ms) { var id = setInterval(fn, ms); _timers.push(id); return id; }
-  function _timeout(fn, ms) { var id = setTimeout(fn, ms); _timers.push(id); return id; }
-  function _on(target, event, handler) {
-    target.addEventListener(event, handler);
-    _listeners.push({ target: target, event: event, handler: handler });
-  }
+  var base = ModuleBase();
+  var E = Components.esc;
 
   function buildAgentCard(agent) {
     var card = document.createElement('div');
@@ -47,7 +40,7 @@
     var statsRow = document.createElement('div');
     statsRow.className = 'aa-stats-row';
     Object.keys(agent.stats).forEach(function(key) {
-      statsRow.innerHTML += '<div class="aa-stat"><span class="label-sm">' + key.toUpperCase() + '</span><span class="mono-md" style="color:var(--' + agent.color + ')">' + agent.stats[key] + '</span></div>';
+      statsRow.innerHTML += '<div class="aa-stat"><span class="label-sm">' + E(key.toUpperCase()) + '</span><span class="mono-md" style="color:var(--' + agent.color + ')">' + E(agent.stats[key]) + '</span></div>';
     });
     card.appendChild(statsRow);
 
@@ -67,7 +60,7 @@
     }
     _simIndex++;
     if (_simIndex < _allSteps.length) {
-      _timeout(runSimulation, 1500);
+      base._timeout(runSimulation, 1500);
     }
   }
 
@@ -86,7 +79,7 @@
     var runBtn = Components.ActionButton({
       label: !_simRunning ? 'Run Agent Chain' : _simPaused ? 'Resume' : 'Pause',
       variant: 'primary',
-      onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); },
+      onAddListener: base.onAddListener,
       onClick: function() {
         if (!_simRunning) {
           _simRunning = true;
@@ -110,13 +103,12 @@
       var resetBtn = Components.ActionButton({
         label: 'Reset',
         variant: 'ghost',
-        onAddListener: function(el, event, handler) { _listeners.push({ target: el, event: event, handler: handler }); },
+        onAddListener: base.onAddListener,
         onClick: function() {
           _simRunning = false;
           _simPaused = false;
           _simIndex = 0;
-          _timers.forEach(function(id) { clearTimeout(id); });
-          _timers = [];
+          base._clearTimers();
           buildPanel();
         }
       });
@@ -176,10 +168,7 @@
     _destroyed = true;
     _simRunning = false;
     _simPaused = false;
-    _timers.forEach(function(id) { clearInterval(id); clearTimeout(id); });
-    _timers = [];
-    _listeners.forEach(function(l) { l.target.removeEventListener(l.event, l.handler); });
-    _listeners = [];
+    base._destroy();
     _allSteps = [];
     _container = null;
     _panel = null;
