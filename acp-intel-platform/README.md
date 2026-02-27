@@ -192,6 +192,8 @@ All data-derived HTML values pass through `Components.esc()` to prevent XSS inje
 - **Keyboard navigation**: ArrowLeft/ArrowRight to move between tabs, Enter/Space to activate table rows
 - **Focus management**: `contentMain.focus()` after each module init to anchor screen readers
 - **Visible focus**: `:focus-visible` outlines on all interactive elements
+- **Responsive layout**: 3 breakpoints (1024px, 768px, 480px) with collapsible sidebar hamburger menu
+- **Color contrast**: All informational text meets WCAG AA-large (3:1+) against dark backgrounds
 
 ---
 
@@ -255,7 +257,7 @@ netlify deploy --prod --dir=acp-intel-platform
 - **SPA redirect** — `/* → /index.html` (status 200) for hash-based routing
 - **Cache control** — `/css/*` and `/js/*` cached for 1 hour with `must-revalidate`
 - **Custom 404** — Obsidian dark-themed error page with navigation back to Command Center
-- **OG meta tags** — `og:title`, `og:description`, `og:type` for link previews
+- **OG meta tags** — `og:title`, `og:description`, `og:type`, `og:url` for link previews
 - **Inline SVG favicon** — No external favicon request; embedded in `<link rel="icon">`
 
 ---
