@@ -4,12 +4,13 @@
 
 **AI-powered deal origination and pipeline intelligence for lower middle-market PE**
 
+[![Live Demo](https://img.shields.io/badge/live_demo-peportfoliosignals.netlify.app-34D399?style=flat-square&logo=netlify)](https://peportfoliosignals.netlify.app)
 [![Status](https://img.shields.io/badge/status-working_prototype-34D399?style=flat-square)](#)
-[![Deploy](https://img.shields.io/badge/deploy-netlify-00C7B7?style=flat-square&logo=netlify)](#)
 [![Agents](https://img.shields.io/badge/AI_agents-5-3B82F6?style=flat-square)](#agent-architecture)
 [![Modules](https://img.shields.io/badge/modules-8-14B8A6?style=flat-square)](#eight-interactive-modules)
 [![Signals](https://img.shields.io/badge/signal_detectors-8-A78BFA?style=flat-square)](#signal-detection)
 [![Prospects](https://img.shields.io/badge/scored_prospects-30-EF4444?style=flat-square)](#)
+[![Docs](https://img.shields.io/badge/docs-data_flow-F59E0B?style=flat-square)](#data-flow-documentation)
 
 </div>
 
@@ -29,19 +30,22 @@ Align Capital Partners invests in founder-led B2B services businesses with $3-15
 | Equity Check Range | $20-60M |
 | Target EBITDA | $3-15M |
 
+**Live demo:** [peportfoliosignals.netlify.app](https://peportfoliosignals.netlify.app)
+
 ---
 
 ## Quick Start
 
 The platform is a live, working application.
 
-1. Open the deployed site or run locally with `npx serve .`
+1. Open the [deployed site](https://peportfoliosignals.netlify.app) or run locally with `npx serve .`
 2. Use the sidebar to navigate between eight interactive modules
 3. Click any prospect card in **Deal Pipeline** to see conviction scoring details
 4. Try the **Thesis Engine** presets (Platform Consolidation, Founder Transition, Healthcare Services, Tech-Enabled Services)
 5. Run the agent chain in **Agent Architecture** to watch the processing sequence
 6. Model PE returns in **Value Creation** with adjustable deal parameters
 7. Open **Signal Detection** to explore how 8 specialized detectors scan API sources — run a simulated detection scan with live cost tracking
+8. View the **[Data Flow](https://peportfoliosignals.netlify.app/docs/data-flow.html)** page to understand how the 5-stage intelligence pipeline works
 
 ---
 
@@ -91,6 +95,33 @@ Five agents form the intelligence pipeline:
 | **Thesis Builder** | Deal positioning and thesis alignment | IC-ready briefs and approach recommendations |
 | **Value Modeler** | Returns modeling and deal structuring | MOIC/IRR projections, capital structure analysis |
 | **Portfolio Monitor** | Feedback loop and model calibration | Weight tuning, prediction accuracy tracking |
+
+---
+
+## Data Flow Documentation
+
+A standalone interactive page explains the 5-stage intelligence pipeline for a non-technical audience:
+
+**[View Data Flow →](https://peportfoliosignals.netlify.app/docs/data-flow.html)**
+
+| Feature | Details |
+|---------|---------|
+| Format | Self-contained HTML page with inline CSS/JS (no dependencies) |
+| Design | Obsidian dark theme with Plus Jakarta Sans + JetBrains Mono |
+| Pipeline | 5 horizontal stage cards with animated particle connectors |
+| Feedback Loop | SVG arc animation connecting Stage 5 back to Stage 1 |
+| Detail Panels | Click any stage to expand — plain-language explanations, visual components, real-world examples |
+| Responsive | 3 breakpoints — desktop (5-column pipeline), tablet (wrapped grid), mobile (stacked cards) |
+
+### Stage Detail Panels
+
+| Stage | Agent | What the Panel Shows |
+|-------|-------|---------------------|
+| Detect | Signal Hunter | 8 signal types monitored, 2-6 hr detection speed, Apex Compliance example |
+| Score & Rank | Deal Qualifier | 6 conviction dimensions with weights, 4 priority tiers (HOT/WARM/NURTURE/STRATEGIC) |
+| Build Thesis | Thesis Builder | Sample IC brief for Apex Compliance, 4 investment lenses |
+| Model Returns | Value Modeler | Animated Bear/Base/Bull MOIC bars, 55/45 equity-debt split bar, $90M EV |
+| Learn & Adapt | Portfolio Monitor | 4-step feedback loop flow, 4 tracked metrics, continuous learning example |
 
 ---
 
@@ -174,7 +205,7 @@ Each detector includes a simulated scan playback with Run/Pause/Reset controls. 
 
 | Header | Value |
 |--------|-------|
-| Content-Security-Policy | `default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src fonts.gstatic.com` |
+| Content-Security-Policy | `default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src fonts.gstatic.com; img-src 'self' data:; connect-src 'self'` |
 | X-Frame-Options | `SAMEORIGIN` |
 | X-Content-Type-Options | `nosniff` |
 | Referrer-Policy | `strict-origin-when-cross-origin` |
@@ -207,6 +238,9 @@ PE Signals/
     ├── index.html                  # SPA shell — sidebar nav + content panels
     ├── 404.html                    # Custom 404 page with Obsidian dark theme
     ├── README.md
+    │
+    ├── docs/
+    │   └── data-flow.html          # Interactive 5-stage pipeline explainer (standalone)
     │
     ├── css/
     │   ├── obsidian.css            # Design system tokens (colors, typography, spacing)
@@ -247,17 +281,18 @@ No build step. No bundler. No transpiler. Zero dependencies.
 # Local development
 npx serve .
 
-# Netlify deployment (manual)
-netlify deploy --prod --dir=acp-intel-platform
+# Netlify deployment (automatic via GitHub integration)
+# Or manual: netlify deploy --prod --dir=acp-intel-platform
 ```
 
 ### Production Configuration
 
+- **Live URL** — [peportfoliosignals.netlify.app](https://peportfoliosignals.netlify.app)
 - **Security headers** — CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy (configured in `netlify.toml`)
 - **SPA redirect** — `/* → /index.html` (status 200) for hash-based routing
 - **Cache control** — `/css/*` and `/js/*` cached for 1 hour with `must-revalidate`
 - **Custom 404** — Obsidian dark-themed error page with navigation back to Command Center
-- **OG meta tags** — `og:title`, `og:description`, `og:type`, `og:url` for link previews
+- **OG meta tags** — `og:title`, `og:description`, `og:type`, `og:url` for social sharing link previews
 - **Inline SVG favicon** — No external favicon request; embedded in `<link rel="icon">`
 
 ---
