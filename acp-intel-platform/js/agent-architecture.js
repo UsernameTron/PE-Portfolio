@@ -61,6 +61,9 @@
     _simIndex++;
     if (_simIndex < _allSteps.length) {
       base._timeout(runSimulation, 1500);
+    } else {
+      _simRunning = false;
+      buildPanel();
     }
   }
 

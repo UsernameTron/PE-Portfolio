@@ -88,25 +88,28 @@
     var sorted = Data.prospects.slice().sort(function(a, b) { return b.score - a.score; });
     _tableEl = Components.DataTable({
       columns: [
-        { key: 'score', label: 'Conviction', width: '70px', align: 'center', format: function(v, row) {
+        { key: 'score', label: 'Conviction', width: '62px', align: 'center', format: function(v, row) {
           var color = row.tier === 'HOT' ? 'var(--red)' : row.tier === 'WARM' ? 'var(--amber)' : row.tier === 'NURTURE' ? 'var(--teal)' : 'var(--text-muted)';
           return '<span class="mono-md" style="color:' + color + '">' + E(v) + '</span>';
         }},
-        { key: 'company', label: 'Company' },
-        { key: 'sector', label: 'Sector' },
-        { key: 'ebitda', label: 'EBITDA', align: 'right', format: function(v) { return '<span class="mono-md">' + E(v) + '</span>'; }},
-        { key: 'evEstimate', label: 'EV' },
-        { key: 'signals', label: 'Signal', format: function(v, row) {
+        { key: 'company', label: 'Company', width: '22%' },
+        { key: 'sector', label: 'Sector', width: '16%' },
+        { key: 'ebitda', label: 'EBITDA', width: '72px', align: 'right', format: function(v) { return '<span class="mono-md">' + E(v) + '</span>'; }},
+        { key: 'evEstimate', label: 'EV', width: '62px' },
+        { key: 'signals', label: 'Signal', width: '16%', format: function(v, row) {
           if (!v || !v.length) return '';
           return Components.SignalBadge(v[0], row.signalColors[0]).outerHTML;
         }},
-        { key: 'processStage', label: 'Stage' },
-        { key: 'tier', label: 'Tier', format: function(v) { return Components.TierBadge(v).outerHTML; }}
+        { key: 'processStage', label: 'Stage', width: '14%' },
+        { key: 'tier', label: 'Tier', width: '60px', format: function(v) { return Components.TierBadge(v).outerHTML; }}
       ],
       rows: sorted,
       onAddListener: base.onAddListener
     });
-    container.appendChild(_tableEl);
+    var tableWrap = document.createElement('div');
+    tableWrap.className = 'cc-pipeline-table';
+    tableWrap.appendChild(_tableEl);
+    container.appendChild(tableWrap);
 
     // ── Panel: Sector Allocation ──
     var techLabel = document.createElement('div');

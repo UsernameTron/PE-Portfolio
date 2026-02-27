@@ -45,6 +45,13 @@
 }
 .cc-tech-count { color: var(--text); }
 
+/* ── Pipeline Table (fixed layout for 8-column fit) ── */
+.cc-pipeline-table .data-table { table-layout: fixed; }
+.cc-pipeline-table .data-table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ── Intelligence Feed ── */
 .cc-feed-header {
   display: flex;

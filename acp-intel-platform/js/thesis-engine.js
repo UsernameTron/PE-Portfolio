@@ -10,7 +10,7 @@
   var E = Components.esc;
 
   var PRESETS = {
-    'Platform Consolidation': [90, 75, 85, 80, 65, 85],
+    'Platform Consolidation': [92, 78, 86, 82, 66, 86],
     'Founder Transition':     [80, 60, 70, 85, 80, 90],
     'Healthcare Services':    [85, 80, 75, 90, 55, 70],
     'Tech-Enabled Services':  [75, 85, 90, 70, 70, 60]

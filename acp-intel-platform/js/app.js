@@ -102,14 +102,19 @@
 
   // ── Router ──
   window.addEventListener('hashchange', function() {
-    loadModule(getModuleFromHash());
+    var target = getModuleFromHash();
+    if (target !== window.location.hash.replace('#', '')) {
+      window.location.hash = '#' + target;
+      return;
+    }
+    loadModule(target);
   });
 
   // ── Initial Load ──
   document.addEventListener('DOMContentLoaded', function() {
     var startModule = getModuleFromHash();
-    if (!window.location.hash) {
-      window.location.hash = '#' + DEFAULT_MODULE;
+    if (!window.location.hash || startModule !== window.location.hash.replace('#', '')) {
+      window.location.hash = '#' + startModule;
     } else {
       loadModule(startModule);
     }
