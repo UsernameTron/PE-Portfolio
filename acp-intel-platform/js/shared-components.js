@@ -200,7 +200,7 @@
       var btn = document.createElement('button');
       btn.className = 'filter-tab' + (i === 0 ? ' active' : '');
       btn.dataset.value = tab.label;
-      btn.innerHTML = tab.label + ' <span class="filter-tab-count">' + tab.count + '</span>';
+      btn.innerHTML = esc(tab.label) + ' <span class="filter-tab-count">' + esc(String(tab.count)) + '</span>';
       btn.setAttribute('role', 'tab');
       btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
       btn.tabIndex = i === 0 ? 0 : -1;
@@ -420,7 +420,7 @@
     var el = document.createElement('div');
     el.className = 'empty-state';
     el.innerHTML =
-      '<div class="empty-state-icon">' + (opts.icon || '&#9675;') + '</div>' +
+      '<div class="empty-state-icon">' + esc(opts.icon || '\u25CB') + '</div>' +
       '<div class="empty-state-title heading-md">' + esc(opts.title || 'No results') + '</div>' +
       '<div class="empty-state-msg body-sm">' + esc(opts.message || 'Try adjusting your search or filters.') + '</div>';
     return el;

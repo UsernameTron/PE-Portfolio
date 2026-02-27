@@ -64,7 +64,7 @@
   outline-offset: -2px;
 }
 .nav-icon {
-  font-size: 10px;
+  font-size: var(--text-xs);
   width: 16px;
   text-align: center;
 }
