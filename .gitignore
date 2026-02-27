@@ -3,3 +3,13 @@
 *.swp
 *.swo
 *~
+
+# Agent config & planning artifacts
+acp-intel-platform/CLAUDE.md
+ACP_CLAUDE_CODE_PLAN.md
+ACP_Platform_Engineering_Analysis.docx
+PRODUCTION_READINESS_PROMPT.md
+WHITE_LABEL_FEASIBILITY.md
+acp-intel-platform/ACP_*.md
+acp-intel-platform/Additional_Plan.md
+tasks/
