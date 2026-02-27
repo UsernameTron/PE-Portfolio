@@ -24,7 +24,39 @@
     if (pipeline) pipeline.innerHTML = '● PIPELINE <strong>' + E(Data.getAggregateEV()) + '</strong>';
   }
 
-  document.addEventListener('DOMContentLoaded', populateStatusBar);
+  // ── Mobile sidebar toggle ──
+  function initMobileNav() {
+    var sidebar = document.getElementById('sidebar');
+    var toggle = document.getElementById('menu-toggle');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (!toggle || !sidebar) return;
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function() {
+      if (sidebar.classList.contains('open')) { closeSidebar(); } else { openSidebar(); }
+    });
+    overlay.addEventListener('click', closeSidebar);
+
+    // Close sidebar on navigation
+    document.querySelectorAll('.nav-tab').forEach(function(tab) {
+      tab.addEventListener('click', closeSidebar);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    populateStatusBar();
+    initMobileNav();
+  });
 
   // Expose for app.js to call
   window.Shell = { activateNavTab: activateNavTab, populateStatusBar: populateStatusBar };

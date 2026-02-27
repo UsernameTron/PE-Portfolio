@@ -21,7 +21,7 @@
 }
 .cm-share { margin-bottom: var(--space-2); }
 .cm-desc { color: var(--text-secondary); margin-bottom: var(--space-3); }
-.cm-list-label { color: var(--text-faint); margin-bottom: var(--space-1); }
+.cm-list-label { color: var(--text-muted); margin-bottom: var(--space-1); }
 .cm-list-item { padding: var(--space-1) 0; }
 .cm-metrics-row {
   display: flex;
